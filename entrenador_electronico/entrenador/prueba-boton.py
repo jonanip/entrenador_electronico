@@ -10,7 +10,7 @@ class App(QWidget):
         self.title = "Prueba"
         self.left = 10
         self.top = 10
-        self.width = 320
+        self.width = 400
         self.height = 200
         self.initUI()
 
