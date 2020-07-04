@@ -1,7 +1,6 @@
-import sys
 from PyQt5 import QtWidgets
 from entrenador_electronico.templates.plantilla_image import Ui_MainWindow
-from PyQt5.QtGui import QIcon, QPixmap
+from PyQt5.QtGui import QPixmap
 
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):

@@ -1,6 +1,6 @@
 import sys
 import pathlib
-from PyQt5.QtWidgets import QWidget, QApplication, QPushButton, QTabWidget, QStackedLayout, QVBoxLayout, QGridLayout, QHBoxLayout, QMainWindow, QLabel, QToolBar, QAction, QStatusBar
+from PyQt5.QtWidgets import QWidget, QApplication, QVBoxLayout, QHBoxLayout, QMainWindow, QLabel, QToolBar, QAction, QStatusBar
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIcon, QPalette, QColor
 import PyQt5
@@ -20,15 +20,29 @@ class MainWindow(QMainWindow):
 
         self.setWindowTitle("My Awesome App")
 
-        tabs = QTabWidget()
-        tabs.setDocumentMode(True)
-        tabs.setTabPosition(QTabWidget.East)
-        tabs.setMovable(True)
+        layout1 = QHBoxLayout()
+        layout2 = QVBoxLayout()
+        layout3 = QVBoxLayout()
 
-        for n, color in enumerate(['red', 'green', 'blue', 'yellow']):
-            tabs.addTab(Color(color), color)
+        layout1.setContentsMargins(0, 0, 0, 0)
+        layout1.setSpacing(20)
 
-        self.setCentralWidget(tabs)
+        layout2.addWidget(Color('red'))
+        layout2.addWidget(Color('yellow'))
+        layout2.addWidget(Color('purple'))
+
+        layout1.addLayout(layout2)
+
+        layout1.addWidget(Color('green'))
+
+        layout3.addWidget(Color('red'))
+        layout3.addWidget(Color('purple'))
+
+        layout1.addLayout(layout3)
+
+        widget = QWidget()
+        widget.setLayout(layout1)
+        self.setCentralWidget(widget)
 
 
     def on_toolbar_click(self, s):
