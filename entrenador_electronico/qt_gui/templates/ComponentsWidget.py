@@ -5,6 +5,8 @@ from PyQt5 import QtGui, QtWidgets, QtCore
 from config import config
 
 
+
+
 class ComponentsWidget(QtWidgets.QListWidget):
     def __init__(self, parent=None):
         super(ComponentsWidget, self).__init__(parent)

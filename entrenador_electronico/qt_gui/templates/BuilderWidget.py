@@ -6,6 +6,42 @@ from config import config
 from entrenador_electronico.source.components import BaseComponent
 
 
+class ParametersDialog(QtWidgets.QDialog):
+    def __init__(self, component: BaseComponent, parent=None, *args, **kwargs):
+        self.component = component
+        super(ParametersDialog, self).__init__(*args, **kwargs)
+
+        self.setWindowTitle(f"{self.component.name} {self.component.id + 1}")
+        QBtn = QtWidgets.QDialogButtonBox.Ok | QtWidgets.QDialogButtonBox.Cancel
+
+        self.buttonBox = QtWidgets.QDialogButtonBox(QBtn)
+        self.buttonBox.accepted.connect(self.accept)
+        self.buttonBox.rejected.connect(self.reject)
+
+        self.layout = QtWidgets.QVBoxLayout()
+        # Creates an horizontal layout for the parameters
+        self.h_layout = QtWidgets.QHBoxLayout()
+        # Creates a text label
+        self.value_label = QtWidgets.QLabel(self.component.short_name)
+        self.value_label.setAlignment(QtCore.Qt.AlignRight)
+        # Creates a double value spinner
+        self.value_textbox = QtWidgets.QDoubleSpinBox()
+        self.value_textbox.setMaximum(1E8)
+        self.value_textbox.setMinimum(-1E8)
+        self.value_textbox.setValue(self.component.component_value)
+
+        self.h_layout.addWidget(self.value_label)
+        self.h_layout.addWidget(self.value_textbox)
+        self.layout.addLayout(self.h_layout)
+        self.layout.addWidget(self.buttonBox)
+        self.setLayout(self.layout)
+
+    def accept(self):
+        self.component.value = self.value_textbox.value()
+        self.close()
+
+
+
 class ComponentLabel(QtWidgets.QLabel):
     def __init__(self, component: BaseComponent, *args, **kwargs):
         super(ComponentLabel, self).__init__(*args, **kwargs)
@@ -47,8 +83,13 @@ class ComponentLabel(QtWidgets.QLabel):
                 return
         super(ComponentLabel, self).mouseReleaseEvent(event)
 
-    def mouseDoubleClickEvent(self, a0: QtGui.QMouseEvent) -> None:
-        print("information")
+    def mouseDoubleClickEvent(self, event: QtGui.QMouseEvent) -> None:
+        print(f"{self.component.name} {self.component.id}")
+        parameters_dialog = ParametersDialog(component=self.component)
+        parameters_dialog.exec_()
+        self.component.value = parameters_dialog.component.value
+        self.update_component()
+
 
     def create_info_label(self):
         self.info_label = QtWidgets.QLabel(parent=self)
@@ -58,6 +99,15 @@ class ComponentLabel(QtWidgets.QLabel):
         self.info_label.setGeometry((self.x() + self.icon.width() - self.info_label.width()) / 2.0, self.y(), self.info_label.width(), self.info_label.height())
         self.info_label.show()
 
+    def update_component(self):
+        self.info_label.setText(self.component.info_value)
+        self.setStatusTip(self.component.status_value)
+        self.info_label.setAlignment(QtCore.Qt.AlignCenter)
+        self.info_label.adjustSize()
+        # self.info_label.setGeometry(self.info_label.x() - self.info_label.width() / 2.0, self.info_label.y(),
+        #                             self.info_label.width(), self.info_label.height())
+        self.info_label.show()
+
 
 class BuilderWidget(QtWidgets.QFrame):
     def __init__(self, *args, **kwargs):
@@ -65,6 +115,7 @@ class BuilderWidget(QtWidgets.QFrame):
         self.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.setLineWidth(0.6)
         self.setAcceptDrops(True)
+        self.setMinimumSize(300, 400)
 
     def dragEnterEvent(self, event: QtGui.QDragEnterEvent):
         if event.mimeData().hasText():

@@ -13,6 +13,8 @@ class BaseComponent(object):
         self.value = value
         self.unit = "ohm"
         self.short_name = "R"
+        if self.drop_event:
+            BaseComponent.counter += 1
 
     @property
     def icon_path(self):
@@ -29,7 +31,7 @@ class BaseComponent(object):
     @property
     def info_value(self):
         if self.value:
-            return f"{self.short_name} = {self.value} {self.unit}"
+            return f"{self.value} {self.unit}"
         else:
             return ""
 
@@ -39,3 +41,10 @@ class BaseComponent(object):
             return f"{self.name} {self.__class__.counter} -> {self.info_value}"
         else:
             return f"{self.name} {self.__class__.counter}"
+
+    @property
+    def component_value(self):
+        if self.value:
+            return float(self.value)
+        else:
+            return 0.0
