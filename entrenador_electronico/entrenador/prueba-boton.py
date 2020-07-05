@@ -1,7 +1,7 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QPushButton
-from PyQt5.QtGui import QIcon
+
 from PyQt5.QtCore import pyqtSlot
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton
 
 
 class App(QWidget):
@@ -34,4 +34,3 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     ex = App()
     sys.exit(app.exec_())
-

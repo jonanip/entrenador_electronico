@@ -1,7 +1,9 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
-from entrenador_electronico.source.components import BaseComponent
-from config import config
 import importlib
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+from config import config
+from entrenador_electronico.source.components import BaseComponent
 
 
 class ComponentLabel(QtWidgets.QLabel):
@@ -62,16 +64,12 @@ class BuilderWidget(QtWidgets.QFrame):
             pos: QtCore.QPoint = event.pos()
             component_name = event.mimeData().text()
             component_module = importlib.import_module(config.component_dict[component_name].module_path)
-            component_class = getattr(component_module, config.component_dict[component_name].class_name)(drop_event=True)
+            component_class = getattr(component_module, config.component_dict[component_name].class_name)(
+                drop_event=True)
             drop_component = ComponentLabel(component=component_class, parent=self)
             drop_component.setPixmap(drop_component.component.icon_qpixmap)
             drop_component.setGeometry(pos.x(), pos.y(), drop_component.width(), drop_component.height())
             drop_component.show()
 
-
-
     def dragMoveEvent(self, event: QtGui.QDragMoveEvent) -> None:
         pass
-
-
-

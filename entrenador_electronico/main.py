@@ -1,6 +1,8 @@
-from PyQt5.QtWidgets import QApplication
-from entrenador_electronico.qt_gui.templates import MainWindow
 import sys
+
+from PyQt5.QtWidgets import QApplication
+
+from entrenador_electronico.qt_gui.templates import MainWindow
 
 
 def main():

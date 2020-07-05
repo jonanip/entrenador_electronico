@@ -1,8 +1,8 @@
-from PyQt5 import QtGui, QtWidgets, QtCore
-import pathlib
-from entrenador_electronico.source.components import ResistorComponent
-from config import config
 import importlib
+
+from PyQt5 import QtGui, QtWidgets, QtCore
+
+from config import config
 
 
 class ComponentsWidget(QtWidgets.QListWidget):
@@ -13,7 +13,6 @@ class ComponentsWidget(QtWidgets.QListWidget):
         self.setDragDropMode(QtWidgets.QAbstractItemView.DragDrop)
         self.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
         self.setAcceptDrops(True)
-
 
     def ui_init(self):
         self.setMaximumSize(200, 3000)
@@ -31,7 +30,6 @@ class ComponentsWidget(QtWidgets.QListWidget):
         drag.setMimeData(mimeData)
         drag.setHotSpot(e.pos() - self.rect().topLeft())
         dropAction = drag.exec_(QtCore.Qt.MoveAction)
-
 
     def set_up_components(self):
         for component in config.component_dict:

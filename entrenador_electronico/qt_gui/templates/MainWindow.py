@@ -1,6 +1,7 @@
-from PyQt5 import QtGui, QtWidgets, QtCore
-import sys
 import pathlib
+
+from PyQt5 import QtGui, QtWidgets, QtCore
+
 from . import ComponentsWidget, BuilderWidget
 
 
@@ -90,15 +91,14 @@ class MainWindow(QtWidgets.QMainWindow):
         # for i in range(12):
         #     QtWidgets.QListWidgetItem(f'item {i}', self.components_widget)
 
-
         self.builder_widget = BuilderWidget()
         self.main_layout.addWidget(self.builder_widget, 3)
-
 
         # Sets-up the toolbar
         toolbar = QtWidgets.QToolBar("My main toolbar")
         self.addToolBar(toolbar)
-        button_action = QtWidgets.QAction(QtGui.QIcon(str(content_pathlib.joinpath("icons/balloon-box.png"))), "my button", self)
+        button_action = QtWidgets.QAction(QtGui.QIcon(str(content_pathlib.joinpath("icons/balloon-box.png"))),
+                                          "my button", self)
         button_action.setStatusTip("This is your button")
         toolbar.addAction(button_action)
 
