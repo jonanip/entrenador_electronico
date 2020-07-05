@@ -10,7 +10,10 @@ class ComponentLabel(QtWidgets.QLabel):
     def __init__(self, component: BaseComponent, *args, **kwargs):
         super(ComponentLabel, self).__init__(*args, **kwargs)
         self.component = component
-        self.setStatusTip(f"{self.component.name} {self.component.counter}")
+        self.icon = self.component.icon_qpixmap
+        self.setStatusTip(self.component.status_value)
+        self.create_info_label()
+
 
     def mousePressEvent(self, event):
         self.__mousePressPos = None
@@ -47,6 +50,14 @@ class ComponentLabel(QtWidgets.QLabel):
     def mouseDoubleClickEvent(self, a0: QtGui.QMouseEvent) -> None:
         print("information")
 
+    def create_info_label(self):
+        self.info_label = QtWidgets.QLabel(parent=self)
+        self.info_label.setText(self.component.info_value)
+        self.info_label.setAlignment(QtCore.Qt.AlignLeft)
+        self.info_label.adjustSize()
+        self.info_label.setGeometry((self.x() + self.icon.width() - self.info_label.width()) / 2.0, self.y(), self.info_label.width(), self.info_label.height())
+        self.info_label.show()
+
 
 class BuilderWidget(QtWidgets.QFrame):
     def __init__(self, *args, **kwargs):
@@ -68,7 +79,7 @@ class BuilderWidget(QtWidgets.QFrame):
                 drop_event=True)
             drop_component = ComponentLabel(component=component_class, parent=self)
             drop_component.setPixmap(drop_component.component.icon_qpixmap)
-            drop_component.setGeometry(pos.x(), pos.y(), drop_component.width(), drop_component.height())
+            drop_component.setGeometry(pos.x(), pos.y(), drop_component.icon.width(), drop_component.icon.height() + drop_component.info_label.height()*2.0)
             drop_component.show()
 
     def dragMoveEvent(self, event: QtGui.QDragMoveEvent) -> None:

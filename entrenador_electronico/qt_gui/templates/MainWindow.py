@@ -1,6 +1,7 @@
 import pathlib
 
 from PyQt5 import QtGui, QtWidgets, QtCore
+from config import config
 
 from . import ComponentsWidget, BuilderWidget
 
@@ -84,6 +85,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.setWindowTitle("Entrenador electronico")
         self.content_widget = QtWidgets.QWidget()
         self.main_layout = QtWidgets.QHBoxLayout()
+        self.resize(config.general.width, config.general.height)
 
         self.components_widget = ComponentsWidget()
         self.main_layout.addWidget(self.components_widget, 1)
