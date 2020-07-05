@@ -130,7 +130,7 @@ class BuilderWidget(QtWidgets.QFrame):
                 drop_event=True)
             drop_component = ComponentLabel(component=component_class, parent=self)
             drop_component.setPixmap(drop_component.component.icon_qpixmap)
-            drop_component.setGeometry(pos.x(), pos.y(), drop_component.icon.width(), drop_component.icon.height() + drop_component.info_label.height()*2.0)
+            drop_component.setGeometry(pos.x() - drop_component.width()/2.0, pos.y() - drop_component.height()/2.0, drop_component.icon.width(), drop_component.icon.height() + drop_component.info_label.height()*2.0)
             drop_component.show()
 
     def dragMoveEvent(self, event: QtGui.QDragMoveEvent) -> None:
