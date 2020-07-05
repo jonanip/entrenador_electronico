@@ -1,53 +1,11 @@
 from PyQt5 import QtGui, QtWidgets, QtCore
 import pathlib
 from entrenador_electronico.source.components import ResistorComponent
-
-
-class Resistor():
-    def __init__(self):
-        self.name = "Resistor"
-
-
-class ThumbListWidget(QtWidgets.QListWidget):
-    def __init__(self, type, parent=None):
-        super(ThumbListWidget, self).__init__(parent)
-        self.setIconSize(QtCore.QSize(124, 124))
-        self.setDragDropMode(QtWidgets.QAbstractItemView.DragDrop)
-        self.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
-        self.setAcceptDrops(True)
-
-    def dragEnterEvent(self, event):
-        if event.mimeData().hasUrls():
-            event.accept()
-        else:
-            super(ThumbListWidget, self).dragEnterEvent(event)
-
-    def dragMoveEvent(self, event):
-        if event.mimeData().hasUrls():
-            event.setDropAction(QtCore.Qt.CopyAction)
-            event.accept()
-        else:
-            super(ThumbListWidget, self).dragMoveEvent(event)
-
-    def dropEvent(self, event):
-        print ('dropEvent', event)
-        if event.mimeData().hasUrls():
-            event.setDropAction(QtCore.Qt.CopyAction)
-            event.accept()
-            links = []
-            for url in event.mimeData().urls():
-                links.append(str(url.toLocalFile()))
-            self.emit(QtCore.PYQT_SIGNAL("dropped"), links)
-        else:
-            event.setDropAction(QtCore.Qt.MoveAction)
-            super(ThumbListWidget, self).dropEvent(event)
+from config import config
+import importlib
 
 
 class ComponentsWidget(QtWidgets.QListWidget):
-    components_dict = {
-        "Resistor": pathlib.Path(
-            "G:/My Drive/dev/entrenador_electronico/entrenador_electronico/qt_gui/content/icons/resistor.png")
-    }
     def __init__(self, parent=None):
         super(ComponentsWidget, self).__init__(parent)
         self.ui_init()
@@ -72,15 +30,14 @@ class ComponentsWidget(QtWidgets.QListWidget):
         drag = QtGui.QDrag(self)
         drag.setMimeData(mimeData)
         drag.setHotSpot(e.pos() - self.rect().topLeft())
-
         dropAction = drag.exec_(QtCore.Qt.MoveAction)
 
     def set_up_components(self):
-        for component in self.components_dict:
-            print(str(self.components_dict[component]))
+        for component in config.component_dict:
+            component_module = importlib.import_module(config.component_dict[component].module_path)
+            component_class = getattr(component_module, config.component_dict[component].class_name)
             item = QtWidgets.QListWidgetItem(component)
-            item.setIcon(QtGui.QIcon(str(self.components_dict[component])))
-            print(ResistorComponent())
-            item.setData(QtCore.Qt.UserRole, ResistorComponent())
-            print(item.data(QtCore.Qt.UserRole))
+            item_instance = component_class()
+            item.setIcon(QtGui.QIcon(item_instance.icon_path))
+            item.setData(QtCore.Qt.UserRole, item_instance)
             self.addItem(item)
