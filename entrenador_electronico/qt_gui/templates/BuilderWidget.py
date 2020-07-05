@@ -43,12 +43,16 @@ class ParametersDialog(QtWidgets.QDialog):
 
 
 class ComponentLabel(QtWidgets.QLabel):
-    def __init__(self, component: BaseComponent, *args, **kwargs):
+    def __init__(self, component: BaseComponent, event_pos=None, *args, **kwargs):
         super(ComponentLabel, self).__init__(*args, **kwargs)
         self.component = component
         self.icon = self.component.icon_qpixmap
         self.setStatusTip(self.component.status_value)
+        self.create_icon()
         self.create_info_label()
+        self.correct_size(event_pos=event_pos)
+        self.create_connection_buttons()
+
 
 
     def mousePressEvent(self, event):
@@ -108,6 +112,26 @@ class ComponentLabel(QtWidgets.QLabel):
         #                             self.info_label.width(), self.info_label.height())
         self.info_label.show()
 
+    def create_connection_buttons(self):
+        fixed_size = QtCore.QSize(10, 10)
+        self.conn_a = QtWidgets.QPushButton(parent=self)
+        self.conn_b = QtWidgets.QPushButton(parent=self)
+        self.conn_a.setFixedSize(fixed_size)
+        self.conn_b.setFixedSize(fixed_size)
+        self.conn_a.show()
+        self.conn_b.show()
+        self.conn_a.move(-1, round(self.height() / 2.0) - 4)
+        self.conn_b.move(self.width()-self.conn_b.width() + 1, round(self.height() / 2.0) - 4)
+
+    def create_icon(self):
+        self.setPixmap(self.component.icon_qpixmap)
+
+    def correct_size(self, event_pos):
+        self.setGeometry(event_pos.x() - round(self.width()/2.0),
+                                   event_pos.y() - round(self.height()/2.0),
+                                   self.icon.width(),
+                                   self.icon.height() + self.info_label.height()*2.0)
+
 
 class BuilderWidget(QtWidgets.QFrame):
     def __init__(self, *args, **kwargs):
@@ -128,9 +152,7 @@ class BuilderWidget(QtWidgets.QFrame):
             component_module = importlib.import_module(config.component_dict[component_name].module_path)
             component_class = getattr(component_module, config.component_dict[component_name].class_name)(
                 drop_event=True)
-            drop_component = ComponentLabel(component=component_class, parent=self)
-            drop_component.setPixmap(drop_component.component.icon_qpixmap)
-            drop_component.setGeometry(pos.x() - drop_component.width()/2.0, pos.y() - drop_component.height()/2.0, drop_component.icon.width(), drop_component.icon.height() + drop_component.info_label.height()*2.0)
+            drop_component = ComponentLabel(component=component_class, event_pos=pos, parent=self)
             drop_component.show()
 
     def dragMoveEvent(self, event: QtGui.QDragMoveEvent) -> None:
