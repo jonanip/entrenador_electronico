@@ -8,7 +8,7 @@ class ComponentLabel(QtWidgets.QLabel):
     def __init__(self, component: BaseComponent, *args, **kwargs):
         super(ComponentLabel, self).__init__(*args, **kwargs)
         self.component = component
-        self.setStatusTip(self.component.name)
+        self.setStatusTip(f"{self.component.name} {self.component.counter}")
 
     def mousePressEvent(self, event):
         self.__mousePressPos = None
@@ -62,7 +62,7 @@ class BuilderWidget(QtWidgets.QFrame):
             pos: QtCore.QPoint = event.pos()
             component_name = event.mimeData().text()
             component_module = importlib.import_module(config.component_dict[component_name].module_path)
-            component_class = getattr(component_module, config.component_dict[component_name].class_name)()
+            component_class = getattr(component_module, config.component_dict[component_name].class_name)(drop_event=True)
             drop_component = ComponentLabel(component=component_class, parent=self)
             drop_component.setPixmap(drop_component.component.icon_qpixmap)
             drop_component.setGeometry(pos.x(), pos.y(), drop_component.width(), drop_component.height())

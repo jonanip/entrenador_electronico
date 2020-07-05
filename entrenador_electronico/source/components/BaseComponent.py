@@ -1,10 +1,14 @@
 from entrenador_electronico.source.utils import get_content_path
 from PyQt5 import QtWidgets, QtCore, QtGui
 
+
 class BaseComponent(object):
-    def __init__(self):
+    counter = 0
+    def __init__(self, drop_event=None):
         self.name = "default_name"
+        self.drop_event = drop_event
         self.icon_route = get_content_path()
+
 
     @property
     def icon_path(self):
