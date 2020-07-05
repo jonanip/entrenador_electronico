@@ -79,7 +79,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def init_ui(self):
         # self.windowTitleChanged.connect(self.onWindowTitleChange)
-
         # self.windowTitleChanged.connect(lambda x: self.my_custom_fn(x, 25))
         content_pathlib = pathlib.Path("G:\My Drive\dev\entrenador_electronico\entrenador_electronico\qt-gui\content")
         self.setWindowTitle("Entrenador electronico")

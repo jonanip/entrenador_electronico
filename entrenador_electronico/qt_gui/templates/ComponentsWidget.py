@@ -5,8 +5,6 @@ from PyQt5 import QtGui, QtWidgets, QtCore
 from config import config
 
 
-
-
 class ComponentsWidget(QtWidgets.QListWidget):
     def __init__(self, parent=None):
         super(ComponentsWidget, self).__init__(parent)
@@ -18,7 +16,7 @@ class ComponentsWidget(QtWidgets.QListWidget):
 
     def ui_init(self):
         self.setMaximumSize(200, 3000)
-        self.setMinimumSize(100, 200)
+        self.setMinimumSize(200, 200)
         self.set_up_components()
 
     def mouseMoveEvent(self, e):
