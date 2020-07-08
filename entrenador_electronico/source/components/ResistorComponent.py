@@ -1,7 +1,8 @@
-
 from entrenador_electronico.source.utils import get_content_path
 from .BaseComponent import BaseComponent
 from config import config
+
+
 class ResistorComponent(BaseComponent):
     counter = 0
 
