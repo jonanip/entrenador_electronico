@@ -13,6 +13,7 @@ class BaseComponent(object):
         self.value = value
         self.unit = "ohm"
         self.short_name = "R"
+        self.id = BaseComponent.counter
         if self.drop_event:
             BaseComponent.counter += 1
 

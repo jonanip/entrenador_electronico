@@ -8,7 +8,7 @@ component_dict:
     class_name: ResistorComponent
     default_name: Resistor
     default_shortname: R
-    default_value: 200
+    default_value: 200.00
     default_unit: ohm
   light:
     module_path: entrenador_electronico.source.components.LightComponent
@@ -22,7 +22,7 @@ component_dict:
     class_name: BatteryComponent
     default_name: Battery
     default_shortname: V
-    default_value: 5
+    default_value: 5.00
     default_unit: V
   condensador:
     module_path: entrenador_electronico.source.components.CondensadorComponent

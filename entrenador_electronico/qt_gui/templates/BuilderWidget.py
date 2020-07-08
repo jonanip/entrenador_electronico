@@ -6,6 +6,35 @@ from config import config
 from entrenador_electronico.source.components import BaseComponent
 
 
+class ConnectionButton(QtWidgets.QPushButton):
+    def __init__(self, *args, **kwargs):
+        super(ConnectionButton, self).__init__(*args, **kwargs)
+
+    # def mousePressEvent(self, event: QtGui.QMouseEvent) -> None:
+    #     self.__mousePressPos = None
+    #     self.__mouseMovePos = None
+    #     if event.button() == QtCore.Qt.LeftButton:
+    #         self.__mousePressPos = event.globalPos()
+    #         self.__mouseMovePos = event.globalPos()
+    #     # painter = QtGui.QPainter
+    #     # painter.setPen(QtCore.Qt.black)
+    #     print(self.__mousePressPos)
+    #     super(ConnectionButton, self).mousePressEvent(event)
+    #
+    #
+    # def mouseMoveEvent(self, event):
+    #     if event.buttons() == QtCore.Qt.LeftButton:
+    #         # adjust offset from clicked point to origin of widget
+    #         currPos = self.mapToGlobal(self.pos())
+    #         globalPos = event.globalPos()
+    #         diff = globalPos - self.__mouseMovePos_
+    #         newPos = self.mapFromGlobal(currPos + diff)
+    #         self.move(newPos)
+    #
+    #         self.__mouseMovePos = globalPos
+    #     super(ConnectionButton, self).mouseMoveEvent(event)
+
+
 class ParametersDialog(QtWidgets.QDialog):
     def __init__(self, component: BaseComponent, parent=None, *args, **kwargs):
         self.component = component
@@ -43,12 +72,16 @@ class ParametersDialog(QtWidgets.QDialog):
 
 
 class ComponentLabel(QtWidgets.QLabel):
-    def __init__(self, component: BaseComponent, *args, **kwargs):
+    def __init__(self, component: BaseComponent, event_pos=None, *args, **kwargs):
         super(ComponentLabel, self).__init__(*args, **kwargs)
         self.component = component
         self.icon = self.component.icon_qpixmap
+        self.is_rotated = False
         self.setStatusTip(self.component.status_value)
+        self.create_icon()
         self.create_info_label()
+        self.correct_size(event_pos=event_pos)
+        self.create_connection_buttons()
 
 
     def mousePressEvent(self, event):
@@ -59,7 +92,11 @@ class ComponentLabel(QtWidgets.QLabel):
             self.__mouseMovePos = event.globalPos()
 
         if event.button() == QtCore.Qt.RightButton:
-            print("info")
+            self.hide()
+
+        if event.button() == QtCore.Qt.MidButton:
+            self.rotate()
+
         super(ComponentLabel, self).mousePressEvent(event)
 
     def mouseMoveEvent(self, event):
@@ -75,6 +112,28 @@ class ComponentLabel(QtWidgets.QLabel):
 
         super(ComponentLabel, self).mouseMoveEvent(event)
 
+    def rotate(self):
+        if not self.is_rotated:
+            transform = QtGui.QTransform()
+            transform.rotate(90)
+            self.setPixmap(self.icon.transformed(transform))
+            self.setGeometry(self.x(), self.y(), self.icon.height(), self.icon.width() + 2*self.info_label.height())
+            self.info_label.setGeometry((self.icon.height()-self.info_label.width()) / 2.0, 0, self.info_label.width(), self.info_label.height())
+            self.conn_a.setGeometry(self.icon.height() / 2 - 4, 12, self.conn_a.width(), self.conn_a.height())
+            self.conn_b.setGeometry(self.icon.height() / 2 - 4, self.height() - 18, self.conn_b.width(), self.conn_b.height())
+            self.is_rotated = True
+        else:
+            transform = QtGui.QTransform()
+            transform.rotate(0)
+            self.setPixmap(self.icon.transformed(transform))
+            self.setGeometry(self.x(), self.y(), self.icon.width(), self.icon.height() + self.info_label.height()*2.0)
+            self.info_label.setGeometry((self.icon.width()-self.info_label.width()) / 2.0, 0, self.info_label.width(), self.info_label.height())
+            self.conn_a.setGeometry(-1, self.height() / 2 - 4, self.conn_a.width(), self.conn_a.height())
+            self.conn_b.setGeometry(self.width() - self.conn_b.width() + 1, self.height() / 2 - 4, self.conn_b.width(), self.conn_b.height())
+            # self.conn_b.setGeometry(self.icon.height() / 2 - 4, self.height() - 18, self.conn_b.width(), self.conn_b.height())
+            self.is_rotated = False
+
+
     def mouseReleaseEvent(self, event):
         if self.__mousePressPos is not None:
             moved = event.globalPos() - self.__mousePressPos
@@ -84,11 +143,11 @@ class ComponentLabel(QtWidgets.QLabel):
         super(ComponentLabel, self).mouseReleaseEvent(event)
 
     def mouseDoubleClickEvent(self, event: QtGui.QMouseEvent) -> None:
-        print(f"{self.component.name} {self.component.id}")
-        parameters_dialog = ParametersDialog(component=self.component)
-        parameters_dialog.exec_()
-        self.component.value = parameters_dialog.component.value
-        self.update_component()
+        if event.buttons() == QtCore.Qt.LeftButton:
+            parameters_dialog = ParametersDialog(component=self.component)
+            parameters_dialog.exec_()
+            self.component.value = parameters_dialog.component.value
+            self.update_component()
 
 
     def create_info_label(self):
@@ -102,11 +161,34 @@ class ComponentLabel(QtWidgets.QLabel):
     def update_component(self):
         self.info_label.setText(self.component.info_value)
         self.setStatusTip(self.component.status_value)
-        self.info_label.setAlignment(QtCore.Qt.AlignCenter)
         self.info_label.adjustSize()
-        # self.info_label.setGeometry(self.info_label.x() - self.info_label.width() / 2.0, self.info_label.y(),
-        #                             self.info_label.width(), self.info_label.height())
+        if not self.is_rotated:
+            self.info_label.setGeometry((self.icon.width() - self.info_label.width()) / 2.0, self.info_label.y(), self.info_label.width(),
+                                        self.info_label.height())
+        else:
+            self.info_label.setGeometry((self.icon.height() - self.info_label.width()) / 2.0, self.info_label.y(),
+                                        self.info_label.width(), self.info_label.height())
         self.info_label.show()
+
+    def create_connection_buttons(self):
+        fixed_size = QtCore.QSize(10, 10)
+        self.conn_a = ConnectionButton(parent=self)
+        self.conn_b = ConnectionButton(parent=self)
+        self.conn_a.setFixedSize(fixed_size)
+        self.conn_b.setFixedSize(fixed_size)
+        self.conn_a.show()
+        self.conn_b.show()
+        self.conn_a.move(-1, round(self.height() / 2.0) - 4)
+        self.conn_b.move(self.width()-self.conn_b.width() + 1, round(self.height() / 2.0) - 4)
+
+    def create_icon(self):
+        self.setPixmap(self.component.icon_qpixmap)
+
+    def correct_size(self, event_pos):
+        self.setGeometry(event_pos.x() - round(self.width()/2.0),
+                                   event_pos.y() - round(self.height()/2.0),
+                                   self.icon.width(),
+                                   self.icon.height() + self.info_label.height()*2.0)
 
 
 class BuilderWidget(QtWidgets.QFrame):
@@ -128,9 +210,7 @@ class BuilderWidget(QtWidgets.QFrame):
             component_module = importlib.import_module(config.component_dict[component_name].module_path)
             component_class = getattr(component_module, config.component_dict[component_name].class_name)(
                 drop_event=True)
-            drop_component = ComponentLabel(component=component_class, parent=self)
-            drop_component.setPixmap(drop_component.component.icon_qpixmap)
-            drop_component.setGeometry(pos.x(), pos.y(), drop_component.icon.width(), drop_component.icon.height() + drop_component.info_label.height()*2.0)
+            drop_component = ComponentLabel(component=component_class, event_pos=pos, parent=self)
             drop_component.show()
 
     def dragMoveEvent(self, event: QtGui.QDragMoveEvent) -> None:
