@@ -60,12 +60,13 @@ class Connections:
             elif x_2 <= x_1:
                 q_2 = QtCore.QPoint(x_1, y_2)
 
-
         q_1 = QtCore.QPoint(x_1, y_1)
         q_3 = q_2
         q_4 = QtCore.QPoint(x_2, y_2)
         lines = [[q_1, q_2], [q_3, q_4]]
         return lines
+
+
 
 
 class ConnectionButton(QtWidgets.QPushButton):
