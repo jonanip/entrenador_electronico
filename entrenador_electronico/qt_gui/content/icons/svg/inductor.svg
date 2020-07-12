@@ -9,7 +9,7 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    inkscape:export-ydpi="96"
    inkscape:export-xdpi="96"
-   inkscape:export-filename="E:\bitmap.png"
+   inkscape:export-filename="C:\Users\salaw\PycharmProjects\entrenador_electronico\entrenador_electronico\qt_gui\content\icons\inductor.png"
    sodipodi:docname="inductor.svg"
    inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
    id="svg42"
@@ -59,7 +59,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -73,8 +73,8 @@
        style="fill:none;stroke:#000000;stroke-width:0.458266;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     <path
        id="path48"
-       d="m 31.749599,5.2915998 h -7.9374 v 0"
-       style="fill:none;stroke:#000000;stroke-width:0.458266;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+       d="m 31.749599,5.2915998 h -6.6145 v 0"
+       style="fill:none;stroke:#000000;stroke-width:0.418338;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     <rect
        y="5.2915998"
        x="6.6144996"
