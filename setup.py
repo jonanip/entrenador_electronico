@@ -5,7 +5,7 @@ import os
 with open("./requirements.txt") as requirements_file:
     req = requirements_file.read()
 
-icon_files = pathlib.Path("entrenador_electronico/qt_gui/content/icons").glob("*")
+icon_files = pathlib.Path("entrenador_electronico/qt_gui/content/icons").glob("*.png")
 icon_files = [os.path.relpath(p) for p in icon_files]
 
 setup(
