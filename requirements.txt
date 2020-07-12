@@ -1,7 +1,6 @@
 numpy~=1.18.1
 matplotlib
-pyqtchart==5.14
-PyQt5==5.14
+pyqt5
 pandas
 python-box
 pyyaml~=5.3.1
