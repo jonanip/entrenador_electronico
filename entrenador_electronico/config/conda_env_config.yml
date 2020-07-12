@@ -1,0 +1,11 @@
+name: entrenador_electronico
+channels:
+  - anaconda-fusion
+  - defaults
+dependencies:
+  - python=3.7
+  - markdown
+  - matplotlib
+  - numpy
+  - pandas
+  - PyQt5

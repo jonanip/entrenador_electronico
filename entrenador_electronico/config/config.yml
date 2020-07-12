@@ -1,0 +1,77 @@
+general:
+  width: 800
+  height: 500
+
+component_dict:
+  resistor:
+    module_path: entrenador_electronico.source.components.ResistorComponent
+    class_name: ResistorComponent
+    default_name: Resistor
+    default_shortname: R
+    default_value: 200.00
+    default_unit: ohm
+  light:
+    module_path: entrenador_electronico.source.components.LightComponent
+    class_name: LightComponent
+    default_name: Light
+    default_shortname: L
+    default_value:
+    default_unit:
+  battery:
+    module_path: entrenador_electronico.source.components.BatteryComponent
+    class_name: BatteryComponent
+    default_name: Battery
+    default_shortname: V
+    default_value: 5.00
+    default_unit: V
+  condensador:
+    module_path: entrenador_electronico.source.components.CondensadorComponent
+    class_name: CondensadorComponent
+    default_name: Condensador
+    default_shortname: F
+    default_value: 10
+    default_unit: uF
+  diodo:
+    module_path: entrenador_electronico.source.components.DiodoComponent
+    class_name: DiodoComponent
+    default_name: Diodo
+    default_shortname: D
+    default_value: 1
+    default_unit: d
+  inductor:
+    module_path: entrenador_electronico.source.components.InductorComponent
+    class_name: InductorComponent
+    default_name: Inductor
+    default_shortname: L
+    default_value: 10
+    default_unit: H
+  transistorNPN:
+    module_path: entrenador_electronico.source.components.TransistorNPNComponent
+    class_name: TransistorNPNComponent
+    default_name: TransistorNPN
+    default_shortname: T
+    default_value: 100
+    default_unit: NPN
+  transistorPNP:
+    module_path: entrenador_electronico.source.components.TransistorPNPComponent
+    class_name: TransistorPNPComponent
+    default_name: TransistorPNP
+    default_shortname: T
+    default_value: 100
+    default_unit: PNP
+database:
+  1:
+    element_type: resistor
+    element_value: 220
+  12:
+    element_type: resistor
+    element_value: 220
+  4:
+    element_type: resistor
+    element_value: 220
+  6:
+    element_type: resistor
+    element_value: 220
+  7:
+    element_type: condensador
+    element_value: 100

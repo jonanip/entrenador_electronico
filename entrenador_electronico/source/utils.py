@@ -11,4 +11,4 @@ def get_content_path():
 
 
 def get_config_path():
-    return get_project_root() / "../config/config.yml"
+    return get_project_root() / "config/config.yml"
