@@ -1,7 +1,6 @@
 numpy~=1.18.1
 matplotlib
-sip
-PyQt-builder
+pyqtchart==5.14
 PyQt5==5.14
 pandas
 python-box
