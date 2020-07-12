@@ -1,11 +1,12 @@
 from setuptools import setup
 import pathlib
+import os
 
 with open("./requirements.txt") as requirements_file:
     req = requirements_file.read()
 
 icon_files = pathlib.Path("entrenador_electronico/qt_gui/content/").glob("**/*")
-icon_files = [format(p).replace(".", "/") for p in icon_files]
+icon_files = [os.path.abspath(p) for p in icon_files]
 icon_files.pop(0)
 setup(
     name='entrenador_electronico',
