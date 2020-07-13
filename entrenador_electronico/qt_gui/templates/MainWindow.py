@@ -115,5 +115,5 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def connection_phase_window(self):
         """Starts the connection phase window"""
-        connection_phase_dialog = ConnectionPhaseDialog(component=Components.components[0]["instance"], parent=self)
+        connection_phase_dialog = ConnectionPhaseDialog(parent=self)
         connection_phase_dialog.exec_()

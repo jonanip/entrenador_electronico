@@ -25,14 +25,17 @@ class ComponentIcon(QtWidgets.QLabel):
 
 class ConnectionPhaseDialog(QtWidgets.QDialog):
     current_id = 0
-    def __init__(self, component: BaseComponent, parent=None, *args, **kwargs):
+    def __init__(self, parent=None, *args, **kwargs):
         super(ConnectionPhaseDialog, self).__init__(*args, **kwargs)
-        self.component = component
-        self.connection_phase = ConnectionPhase()
-        self.connection_phase.compute_components()
-        self.initial_layout()
+        # self.connection_phase = ConnectionPhase()
+        # self.connection_phase.compute_components()
+        print("connection phase")
         self.component_list = list(Components.components.values())
+        print(self.component_list)
         ConnectionPhaseDialog.current_id = 0
+        self.initial_layout()
+
+
         self.update()
 
     def previous_button_func(self):
@@ -48,7 +51,10 @@ class ConnectionPhaseDialog(QtWidgets.QDialog):
         self.update()
 
     def update(self):
-        if ConnectionPhaseDialog.current_id >= len(Components.components) - 1:
+        self.current_component = self.component_list[ConnectionPhaseDialog.current_id]["instance"]
+        self.current_component_label.component = self.current_component
+        self.current_component_label.update()
+        if ConnectionPhaseDialog.current_id >= len(self.component_list) - 1:
             self.next_button.setEnabled(False)
         else:
             self.next_button.setEnabled(True)
@@ -56,16 +62,14 @@ class ConnectionPhaseDialog(QtWidgets.QDialog):
             self.previous_button.setEnabled(False)
         else:
             self.previous_button.setEnabled(True)
-        self.current_component = self.component_list[ConnectionPhaseDialog.current_id]["instance"]
-        self.current_component_label.component = self.current_component
-        self.current_component_label.update()
+
 
     def initial_layout(self):
         self.setWindowTitle(f"Connection phase")
         self.layout = QtWidgets.QVBoxLayout()
         self.layout.setAlignment(QtCore.Qt.AlignRight)
         # Creates an horizontal layout for the parameters
-        self.current_component = Components.components[ConnectionPhaseDialog.current_id]["instance"]
+        self.current_component = self.component_list[ConnectionPhaseDialog.current_id]["instance"]
         self.current_component_label = ComponentIcon(component=self.current_component, parent=self)
         self.current_component_label.setAlignment(QtCore.Qt.AlignCenter)
         self.h_layout = QtWidgets.QHBoxLayout()

@@ -22,10 +22,10 @@ class ConnectionPhase:
         print("Computing component locations")
         self.circuit_length = self.compute_circuit_length()
         self.set_initial_pin()
-        print(self.circuit_length)
-        print(self.set_initial_pin())
-        print(Connections.connections)
-        print(Connections.connection_elements)
+        # print(self.circuit_length)
+        # print(self.set_initial_pin())
+        # print(Connections.connections)
+        # print(Connections.connection_elements)
 
 
     @staticmethod
