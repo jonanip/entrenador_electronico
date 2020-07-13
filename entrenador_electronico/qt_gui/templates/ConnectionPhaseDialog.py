@@ -25,17 +25,16 @@ class ComponentIcon(QtWidgets.QLabel):
 
 class ConnectionPhaseDialog(QtWidgets.QDialog):
     current_id = 0
+
     def __init__(self, parent=None, *args, **kwargs):
         super(ConnectionPhaseDialog, self).__init__(*args, **kwargs)
-        # self.connection_phase = ConnectionPhase()
-        # self.connection_phase.compute_components()
+        self.connection_phase = ConnectionPhase()
+        self.connection_phase.compute_components()
         print("connection phase")
         self.component_list = list(Components.components.values())
         print(self.component_list)
         ConnectionPhaseDialog.current_id = 0
         self.initial_layout()
-
-
         self.update()
 
     def previous_button_func(self):
@@ -62,7 +61,6 @@ class ConnectionPhaseDialog(QtWidgets.QDialog):
             self.previous_button.setEnabled(False)
         else:
             self.previous_button.setEnabled(True)
-
 
     def initial_layout(self):
         self.setWindowTitle(f"Connection phase")

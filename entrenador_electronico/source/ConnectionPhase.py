@@ -1,7 +1,7 @@
 from entrenador_electronico.source.components.Components import Components
-from entrenador_electronico.qt_gui.templates.BuilderWidget import Connections
 from entrenador_electronico.source.components.BaseComponent import BaseComponent
 from entrenador_electronico.source.components.BatteryComponent import BatteryComponent
+from entrenador_electronico.source.Connections import Connections
 import numpy as np
 
 class ConnectionPhase:
@@ -35,6 +35,7 @@ class ConnectionPhase:
         for component_id in Components.components:
             print(component_id)
             component = Components.components[component_id]["instance"]
+            print(component.connections_print())
             if component.__class__.__name__ == "BatteryComponent":  # Avoids batteries in the count
                 continue
             circuit_length += component.element_length

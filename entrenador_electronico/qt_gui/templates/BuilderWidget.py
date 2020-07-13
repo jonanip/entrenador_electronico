@@ -1,9 +1,10 @@
 import importlib
+
 import numpy as np
-from typing import List
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 from config import config
+from entrenador_electronico.source.Connections import Connections
 from entrenador_electronico.source.components import BaseComponent
 from entrenador_electronico.source.components.Components import Components
 
@@ -13,58 +14,6 @@ class ConnectionPainter(QtGui.QPainter):
 
     def paint_connections(self):
         self.drawLine(200, 100, 250, 150)
-
-
-class Connections:
-    """Stores the connections present in the model"""
-    counter = 0
-    connecting = False
-    connections = []
-    connection_elements = []
-    has_connections = False
-
-    @staticmethod
-    def get_connection_lines(connection, frame) -> List:
-        element_1: ConnectionButton = Connections.connection_elements[connection[0]]
-        element_2: ConnectionButton = Connections.connection_elements[connection[1]]
-        # print(f"{element_1.mapFrom(self, element_1.pos()).x()} {element_1.mapFrom(self, element_1.pos()).y()} {element_2.mapFrom(self, element_1.pos()).x()} {element_1.mapFrom(self, element_2.pos()).y()}")
-        element_1_global = element_1.mapToGlobal(element_1.rect().center())
-        element_2_global = element_2.mapToGlobal(element_2.rect().center())
-        # print(f"Local: {self.mapFromGlobal(element_1.mapToGlobal())}")
-        # Line 1
-        x_1 = frame.mapFromGlobal(element_1_global).x()
-        y_1 = frame.mapFromGlobal(element_1_global).y()
-        x_2 = frame.mapFromGlobal(element_2_global).x()
-        y_2 = frame.mapFromGlobal(element_2_global).y()
-
-        if element_1.side == "right" and element_2.side == "left":
-            if x_2 > x_1:
-                q_2 = QtCore.QPoint(x_2, y_1)
-            elif x_2 <= x_1:
-                q_2 = QtCore.QPoint(x_2, y_1)
-        if element_1.side == "right" and element_2.side == "right":
-            if x_2 > x_1:
-                q_2 = QtCore.QPoint(x_2, y_1)
-            elif x_2 <= x_1:
-                q_2 = QtCore.QPoint(x_1, y_2)
-
-        if element_1.side == "left" and element_2.side == "left":
-            if x_2 > x_1:
-                q_2 = QtCore.QPoint(x_1, y_2)
-            elif x_2 <= x_1:
-                q_2 = QtCore.QPoint(x_2, y_1)
-
-        if element_1.side == "left" and element_2.side == "right":
-            if x_2 > x_1:
-                q_2 = QtCore.QPoint(x_1, y_2)
-            elif x_2 <= x_1:
-                q_2 = QtCore.QPoint(x_1, y_2)
-
-        q_1 = QtCore.QPoint(x_1, y_1)
-        q_3 = q_2
-        q_4 = QtCore.QPoint(x_2, y_2)
-        lines = [[q_1, q_2], [q_3, q_4]]
-        return lines
 
 
 class ConnectionButton(QtWidgets.QPushButton):
@@ -104,7 +53,6 @@ class ConnectionButton(QtWidgets.QPushButton):
                         element.setStyleSheet("")
                         element.pair_button.setEnabled(True)
                         element.selected = False
-                    print(Connections.connections)
                     Connections.has_connections = True
                     # BuilderWidget.update()
             else:
@@ -199,7 +147,6 @@ class ComponentLabel(QtWidgets.QLabel):
             self.conn_a.delete_connections()
             self.conn_b.delete_connections()
             self.component.delete_component()
-            print(Components.components)
             # Delete connections of left
 
 
@@ -293,6 +240,10 @@ class ComponentLabel(QtWidgets.QLabel):
         self.conn_b.show()
         self.conn_a.move(-1, round(self.height() / 2.0) - 4)
         self.conn_b.move(self.width()-self.conn_b.width() + 1, round(self.height() / 2.0) - 4)
+
+        # Add connection button info to component
+        self.component.left_connection_id = self.conn_a.id
+        self.component.right_connection_id = self.conn_b.id
         # if Connections.has_connections:
         #     BuilderWidget.update()
         # if Connections.connections:
@@ -350,3 +301,5 @@ class BuilderWidget(QtWidgets.QFrame):
 
     def dragMoveEvent(self, event: QtGui.QDragMoveEvent) -> None:
         pass
+
+

@@ -40,3 +40,5 @@ class ComponentsWidget(QtWidgets.QListWidget):
             item.setIcon(QtGui.QIcon(item_instance.icon_path))
             item.setData(QtCore.Qt.UserRole, item_instance)
             self.addItem(item)
+
+

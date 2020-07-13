@@ -2,6 +2,8 @@ from PyQt5 import QtGui
 
 from entrenador_electronico.source.utils import get_content_path
 from entrenador_electronico.source.components.Components import Components
+from entrenador_electronico.source.Connections import Connections
+from typing import List
 
 
 class BaseComponent(object):
@@ -21,7 +23,7 @@ class BaseComponent(object):
         self.right_connection_id = None
         if self.drop_event:
             BaseComponent.counter += 1
-        Components.components[self.id] = {'instance': self}
+        Components.components[self.global_id] = {'instance': self}
 
     @property
     def icon_path(self):
@@ -58,3 +60,36 @@ class BaseComponent(object):
 
     def delete_component(self):
         Components.components.pop(self.global_id)
+
+    @property
+    def connections(self):
+        """Computes the connections of the element"""
+        component_connections = {"left": [], "right": []}
+        connection: List
+        for connection in Connections.connections:
+            if self.left_connection_id in connection:
+                temp_connection = list(connection)
+                temp_connection.remove(self.left_connection_id)
+                connected_vertex = Connections.connection_elements[temp_connection[0]]
+                connected_parent = connected_vertex.parent_element
+                component_connections["left"].append((connected_parent, connected_vertex))
+
+            if self.right_connection_id in connection:
+                temp_connection = list(connection)
+                temp_connection.remove(self.right_connection_id)
+                connected_vertex = Connections.connection_elements[temp_connection[0]]
+                connected_parent = connected_vertex.parent_element
+                component_connections["right"].append((connected_parent, connected_vertex))
+        return component_connections
+
+    def connections_print(self):
+        print("--- Connection info ---")
+        print(f"{self.name} {self.id} is connected with:")
+        connections = self.connections
+        print("Left:")
+        for element in connections["left"]:
+            print(f"\t{element[0].name} {element[0].id} -> {element[1].side}")
+        print("Right:")
+        for element in connections["right"]:
+            print(f"\t{element[0].name} {element[0].id} -> {element[1].side}")
+        print("--- End Connection info ---")
