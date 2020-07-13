@@ -1,6 +1,7 @@
 from PyQt5 import QtGui
 
 from entrenador_electronico.source.utils import get_content_path
+from entrenador_electronico.source.components.Components import Components
 
 
 class BaseComponent(object):
@@ -14,8 +15,13 @@ class BaseComponent(object):
         self.unit = "ohm"
         self.short_name = "R"
         self.id = BaseComponent.counter
+        self.global_id = BaseComponent.counter
+        self.element_length = 3
+        self.left_connection_id = None
+        self.right_connection_id = None
         if self.drop_event:
             BaseComponent.counter += 1
+        Components.components[self.id] = {'instance': self}
 
     @property
     def icon_path(self):
@@ -49,3 +55,6 @@ class BaseComponent(object):
             return float(self.value)
         else:
             return 0.0
+
+    def delete_component(self):
+        Components.components.pop(self.global_id)

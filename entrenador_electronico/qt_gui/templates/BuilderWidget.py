@@ -5,7 +5,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 from config import config
 from entrenador_electronico.source.components import BaseComponent
-
+from entrenador_electronico.source.components.Components import Components
 
 class ConnectionPainter(QtGui.QPainter):
     def __init__(self, *args, **kwargs):
@@ -67,22 +67,20 @@ class Connections:
         return lines
 
 
-
-
 class ConnectionButton(QtWidgets.QPushButton):
     counter = 0
     connecting = False
     connections = []
     connection_elements = []
 
-    def __init__(self, side=None, *args, **kwargs):
+    def __init__(self, side=None, parent_component: BaseComponent=None, *args, **kwargs):
         super(ConnectionButton, self).__init__(*args, **kwargs)
         self.selected = False
         self.id = Connections.counter
+        self.parent_element = parent_component
         self.side = side
         Connections.connection_elements.append(self)
         Connections.counter += 1
-
 
     def mousePressEvent(self, event):
         if event.button() == QtCore.Qt.LeftButton:
@@ -200,6 +198,8 @@ class ComponentLabel(QtWidgets.QLabel):
             self.hide()
             self.conn_a.delete_connections()
             self.conn_b.delete_connections()
+            self.component.delete_component()
+            print(Components.components)
             # Delete connections of left
 
 
@@ -282,8 +282,8 @@ class ComponentLabel(QtWidgets.QLabel):
 
     def create_connection_buttons(self):
         fixed_size = QtCore.QSize(10, 10)
-        self.conn_a = ConnectionButton(parent=self, side="left")
-        self.conn_b = ConnectionButton(parent=self, side="right")
+        self.conn_a = ConnectionButton(parent=self, side="left", parent_component=self.component)
+        self.conn_b = ConnectionButton(parent=self, side="right", parent_component=self.component)
         self.conn_a.set_pair_button(self.conn_b)
         self.conn_b.set_pair_button(self.conn_a)
 
@@ -345,6 +345,7 @@ class BuilderWidget(QtWidgets.QFrame):
             component_class = getattr(component_module, config.component_dict[component_name].class_name)(
                 drop_event=True)
             drop_component = ComponentLabel(component=component_class, event_pos=pos, parent=self)
+            # Components.component_widget[component_class.id] = drop_component
             drop_component.show()
 
     def dragMoveEvent(self, event: QtGui.QDragMoveEvent) -> None:

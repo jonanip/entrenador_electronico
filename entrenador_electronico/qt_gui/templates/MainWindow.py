@@ -3,6 +3,8 @@ import pathlib
 from PyQt5 import QtGui, QtWidgets, QtCore
 from config import config
 from entrenador_electronico.source.utils import get_content_path
+from entrenador_electronico.qt_gui.templates import ConnectionPhaseDialog
+from entrenador_electronico.source.components.Components import Components
 import os
 
 from . import ComponentsWidget, BuilderWidget
@@ -43,13 +45,9 @@ class DropLabel(QtWidgets.QWidget):
     def dropEvent(self, event: QtGui.QDropEvent):
         pos: QtCore.QPoint = event.pos()
         drop_label = QtWidgets.QLabel()
-        print("label_created")
         drop_label.setText("hey")
-        print("label_created")
         drop_label.setGeometry(20, 20, 50, 20)
-        print("label_created")
         drop_label.show()
-        print("label_created")
         event.acceptProposedAction()
 
 
@@ -104,7 +102,7 @@ class MainWindow(QtWidgets.QMainWindow):
         connection_phase_action = QtWidgets.QAction(QtGui.QIcon(os.path.relpath(icon_path)),
                                           "Connection phase", self)
         connection_phase_action.setStatusTip("Start connection phase")
-        # connection_phase_action.triggered().connect(self.connection_phase_window())
+        connection_phase_action.triggered.connect(self.connection_phase_window)
         toolbar.addAction(connection_phase_action)
 
 
@@ -117,3 +115,5 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def connection_phase_window(self):
         """Starts the connection phase window"""
+        connection_phase_dialog = ConnectionPhaseDialog(component=Components.components[0]["instance"], parent=self)
+        connection_phase_dialog.exec_()
