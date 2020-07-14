@@ -116,11 +116,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.content_widget.setLayout(self.main_layout)
         self.setCentralWidget(self.content_widget)
 
-
-
+        if config.general.led_system:
+            self.led_mapper = LedMapper()
         self.show()
 
     def connection_phase_window(self):
         """Starts the connection phase window"""
-        connection_phase_dialog = ConnectionPhaseDialog(parent=self)
+        connection_phase_dialog = ConnectionPhaseDialog(parent=self, led_mapper=self.led_mapper if config.general.led_system else {})
         connection_phase_dialog.exec_()

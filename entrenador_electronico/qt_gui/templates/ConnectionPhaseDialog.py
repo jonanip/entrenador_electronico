@@ -5,7 +5,6 @@ from entrenador_electronico.source.components.Components import Components
 from entrenador_electronico.source.ConnectionPhase import ConnectionPhase
 from entrenador_electronico.source.Connections import Connections
 from entrenador_electronico.source.LedMapper import LedMapper
-from entrenador_electronico.qt_gui.templates.MainWindow import MainWindow
 import threading
 import time
 
@@ -37,9 +36,11 @@ class ComponentIcon(QtWidgets.QLabel):
 class ConnectionPhaseDialog(QtWidgets.QDialog):
     current_id = 0
 
-    def __init__(self, parent=None, *args, **kwargs):
+    def __init__(self, parent=None, led_mapper=None, *args, **kwargs):
         super(ConnectionPhaseDialog, self).__init__(*args, **kwargs)
         self.threads = []
+        if led_mapper:
+            self.led_mapper = led_mapper
         self.connection_phase = ConnectionPhase()
         self.connection_phase.compute_components()
         self.connection_phase.set_board_matrixes()
@@ -80,13 +81,14 @@ class ConnectionPhaseDialog(QtWidgets.QDialog):
             self.previous_button.setEnabled(False)
         else:
             self.previous_button.setEnabled(True)
-        self.test_thread()
+        if config.general.led_system:
+            self.test_thread()
 
     def test_thread(self):
         LedMapper.counter += 1
         for thread in self.threads:
             thread.join()
-        thread = threading.Thread(target=MainWindow.led_mapper.blink_light, args=(self.current_component.led_color,), daemon=True)
+        thread = threading.Thread(target=self.led_mapper.blink_light, args=(self.current_component.led_color,), daemon=True)
         self.threads.append(thread)
         thread.start()
 
