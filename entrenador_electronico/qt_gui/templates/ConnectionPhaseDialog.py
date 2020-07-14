@@ -5,6 +5,8 @@ from entrenador_electronico.source.components.Components import Components
 from entrenador_electronico.source.ConnectionPhase import ConnectionPhase
 from entrenador_electronico.source.Connections import Connections
 from entrenador_electronico.source.LedMapper import LedMapper
+import threading
+import time
 
 class ComponentIcon(QtWidgets.QLabel):
     def __init__(self, component: BaseComponent, *args, **kwargs):
@@ -17,11 +19,7 @@ class ComponentIcon(QtWidgets.QLabel):
         self.info_label.setAlignment(QtCore.Qt.AlignCenter)
         self.layout.addWidget(self.info_label)
         self.layout.addWidget(self)
-        if config.general.led_system:
-            self.led_mapper = LedMapper()
-            self.led_mapper.pulse_light()
-        # self.create_icon()
-        # self.create_info_label()
+
 
     def update(self):
         if self.component.__class__.__name__ != "ConnectionComponent":
@@ -54,6 +52,8 @@ class ConnectionPhaseDialog(QtWidgets.QDialog):
         ConnectionPhaseDialog.current_id = 0
         self.initial_layout()
         self.update()
+        if config.general.led_system:
+            self.led_mapper = LedMapper()
 
     def previous_button_func(self):
         ConnectionPhaseDialog.current_id -= 1
@@ -79,6 +79,12 @@ class ConnectionPhaseDialog(QtWidgets.QDialog):
             self.previous_button.setEnabled(False)
         else:
             self.previous_button.setEnabled(True)
+        self.test_thread()
+
+    def test_thread(self):
+        thread = threading.Thread(target=self.led_mapper.pulse_light)
+        thread.start()
+
 
     def initial_layout(self):
         self.setWindowTitle(f"Connection phase")
