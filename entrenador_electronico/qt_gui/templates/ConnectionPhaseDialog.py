@@ -38,6 +38,7 @@ class ConnectionPhaseDialog(QtWidgets.QDialog):
 
     def __init__(self, parent=None, *args, **kwargs):
         super(ConnectionPhaseDialog, self).__init__(*args, **kwargs)
+        LedMapper.counter = 0
         if config.general.led_system:
             self.led_mapper = LedMapper()
         self.connection_phase = ConnectionPhase()
@@ -84,7 +85,7 @@ class ConnectionPhaseDialog(QtWidgets.QDialog):
 
     def test_thread(self):
         LedMapper.counter += 1
-        thread = threading.Thread(target=self.led_mapper.blink_light, args=(self.current_component.led_color,))
+        thread = threading.Thread(target=self.led_mapper.blink_light, args=(self.current_component.led_color,), daemon=True)
         thread.start()
 
 
