@@ -32,5 +32,5 @@ class LedMapper:
     def blink_light(self, color="red", speed=1):
         led_color = config.led_colors[color]
         blink = Blink(self.pixel, speed=speed, color=led_color)
-        blink.animate()
-        time.sleep(5)
+        while True:
+            blink.animate()
