@@ -9,6 +9,7 @@ except NotImplementedError:
 from adafruit_led_animation.animation.blink import Blink
 from adafruit_led_animation.animation.pulse import Pulse
 from adafruit_led_animation.animation.solid import Solid
+from adafruit_led_animation.helper import PixelMap
 import time
 import threading
 
@@ -37,14 +38,10 @@ class LedMapper(threading.Thread):
     def blink_light(self, color="red", pins=None, speed=1):
         id = LedMapper.counter
         led_color = config.led_colors[color]
-        current_pixels = []
-        blinks = []
-        for pin in pins:
-            blink = Blink(self.pixel[pin], speed=speed, color=led_color)
-            blinks.append(blink)
+        current_pixels = PixelMap(self.pixel, pins)
+        blink = Blink(current_pixels, speed=speed, color=led_color)
         while id == LedMapper.counter:
-            for blink in blinks:
-                blink.animate()
+            blink.animate()
 
     def stop_lights(self):
         self.running = False
