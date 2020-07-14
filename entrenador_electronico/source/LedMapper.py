@@ -38,7 +38,7 @@ class LedMapper(threading.Thread):
     def blink_light(self, color="red", pins=None, speed=1):
         id = LedMapper.counter
         led_color = config.led_colors[color]
-        current_pixels = PixelMap(self.pixel, pins)
+        current_pixels = PixelMap(self.pixel, pins, individual_pixels=True)
         blink = Blink(current_pixels, speed=speed, color=led_color)
         while id == LedMapper.counter:
             blink.animate()
