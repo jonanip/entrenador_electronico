@@ -75,3 +75,6 @@ database:
   7:
     element_type: condensador
     element_value: 100
+
+led_colors:
+  red: [5, 0, 0]

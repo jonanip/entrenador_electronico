@@ -4,3 +4,5 @@ pandas
 python-box
 pyyaml~=5.3.1
 setuptools~=46.2.0
+adafruit-circuitpython-neopixel
+adafruit-circuitpython-led-animation

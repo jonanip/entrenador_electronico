@@ -1,8 +1,10 @@
 from PyQt5 import QtGui, QtWidgets, QtCore
+from config import config
 from entrenador_electronico.source.components import BaseComponent, ConnectionComponent
 from entrenador_electronico.source.components.Components import Components
 from entrenador_electronico.source.ConnectionPhase import ConnectionPhase
 from entrenador_electronico.source.Connections import Connections
+from entrenador_electronico.source.LedMapper import LedMapper
 
 class ComponentIcon(QtWidgets.QLabel):
     def __init__(self, component: BaseComponent, *args, **kwargs):
@@ -15,6 +17,9 @@ class ComponentIcon(QtWidgets.QLabel):
         self.info_label.setAlignment(QtCore.Qt.AlignCenter)
         self.layout.addWidget(self.info_label)
         self.layout.addWidget(self)
+        if config.general.led_system:
+            self.led_mapper = LedMapper()
+            self.led_mapper.solid_light()
         # self.create_icon()
         # self.create_info_label()
 
