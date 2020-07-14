@@ -83,7 +83,7 @@ class ConnectionPhaseDialog(QtWidgets.QDialog):
         self.test_thread()
 
     def test_thread(self):
-        thread = threading.Thread(target=self.led_mapper.pulse_light)
+        thread = threading.Thread(target=self.led_mapper.pulse_light, args=(self.current_component.led_color,))
         thread.start()
 
 

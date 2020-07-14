@@ -31,6 +31,7 @@ class BaseComponent(object):
         self.type = None
         self.left_connection = None
         self.right_connection = None
+        self.led_color = "red"
 
     @property
     def icon_path(self):

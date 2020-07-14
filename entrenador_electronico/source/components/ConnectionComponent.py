@@ -19,5 +19,6 @@ class ConnectionComponent(BaseComponent):
         self.type = type
         self.left_connection = left_connection
         self.right_connection = right_connection
+        self.led_color = "green"
         ConnectionComponent.counter += 1
 

@@ -77,4 +77,6 @@ database:
     element_value: 100
 
 led_colors:
-  red: [10, 0, 0]
+  red: [50, 0, 0]
+  blue: [0, 0, 50]
+  green: [0, 50, 0]
