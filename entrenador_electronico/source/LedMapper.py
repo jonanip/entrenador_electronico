@@ -23,7 +23,8 @@ class LedMapper:
     def pulse_light(self, color="red", speed=0.5, pins=[]):
         led_color = config.led_colors[color]
         pulse = Pulse(self.pixel, speed=speed, color=led_color)
-        pulse.animate()
+        while True:
+            pulse.animate()
         # for pin in pins:
         #     target_pix = self.pixel[pin]
         #     pulse = Pulse(target_pix, speed=speed, color=led_color)
