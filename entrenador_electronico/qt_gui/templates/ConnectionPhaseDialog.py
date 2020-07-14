@@ -5,6 +5,7 @@ from entrenador_electronico.source.components.Components import Components
 from entrenador_electronico.source.ConnectionPhase import ConnectionPhase
 from entrenador_electronico.source.Connections import Connections
 from entrenador_electronico.source.LedMapper import LedMapper
+from entrenador_electronico.qt_gui.templates.MainWindow import MainWindow
 import threading
 import time
 
@@ -38,8 +39,6 @@ class ConnectionPhaseDialog(QtWidgets.QDialog):
 
     def __init__(self, parent=None, *args, **kwargs):
         super(ConnectionPhaseDialog, self).__init__(*args, **kwargs)
-        if config.general.led_system:
-            self.led_mapper = LedMapper()
         self.threads = []
         self.connection_phase = ConnectionPhase()
         self.connection_phase.compute_components()
@@ -87,7 +86,7 @@ class ConnectionPhaseDialog(QtWidgets.QDialog):
         LedMapper.counter += 1
         for thread in self.threads:
             thread.join()
-        thread = threading.Thread(target=self.led_mapper.blink_light, args=(self.current_component.led_color,), daemon=True)
+        thread = threading.Thread(target=MainWindow.led_mapper.blink_light, args=(self.current_component.led_color,), daemon=True)
         self.threads.append(thread)
         thread.start()
 

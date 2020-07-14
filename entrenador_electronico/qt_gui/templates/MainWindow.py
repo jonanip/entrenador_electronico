@@ -5,6 +5,7 @@ from config import config
 from entrenador_electronico.source.utils import get_content_path
 from entrenador_electronico.qt_gui.templates import ConnectionPhaseDialog
 from entrenador_electronico.source.components.Components import Components
+from entrenador_electronico.source.LedMapper import LedMapper
 import os
 
 from . import ComponentsWidget, BuilderWidget
@@ -73,6 +74,9 @@ class BuilderFrame(QtWidgets.QFrame):
 
 
 class MainWindow(QtWidgets.QMainWindow):
+    if config.general.led_system:
+        led_mapper = LedMapper()
+
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
         self.init_ui()
@@ -111,6 +115,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.content_widget.setLayout(self.main_layout)
         self.setCentralWidget(self.content_widget)
+
+
+
         self.show()
 
     def connection_phase_window(self):
