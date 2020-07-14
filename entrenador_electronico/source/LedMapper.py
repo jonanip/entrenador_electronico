@@ -9,7 +9,7 @@ except NotImplementedError:
 from adafruit_led_animation.animation.blink import Blink
 from adafruit_led_animation.animation.pulse import Pulse
 from adafruit_led_animation.animation.solid import Solid
-
+import time
 
 class LedMapper:
     def __init__(self):
@@ -29,7 +29,8 @@ class LedMapper:
         #     pulse = Pulse(target_pix, speed=speed, color=led_color)
         #     pulse.animate()
 
-    def blink_light(self, color="red", speed = 1):
+    def blink_light(self, color="red", speed=1):
         led_color = config.led_colors[color]
         blink = Blink(self.pixel, speed=speed, color=led_color)
         blink.animate()
+        time.sleep(5)
