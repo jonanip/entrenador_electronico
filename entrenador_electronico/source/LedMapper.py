@@ -34,12 +34,17 @@ class LedMapper(threading.Thread):
         #     pulse = Pulse(target_pix, speed=speed, color=led_color)
         #     pulse.animate()
 
-    def blink_light(self, color="red", speed=1):
+    def blink_light(self, color="red", pins=None, speed=1):
         id = LedMapper.counter
         led_color = config.led_colors[color]
-        blink = Blink(self.pixel, speed=speed, color=led_color)
+        current_pixels = []
+        blinks = []
+        for pin in pins:
+            blink = Blink(self.pixel[pin], speed=speed, color=led_color)
+            blinks.append(blink)
         while id == LedMapper.counter:
-            blink.animate()
+            for blink in blinks:
+                blink.animate()
 
     def stop_lights(self):
         self.running = False
