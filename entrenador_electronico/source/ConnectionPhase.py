@@ -44,6 +44,10 @@ class ConnectionPhase:
                 self.connection_board[self.current_component_r + 1, self.initial_pin] = 1
                 self.current_component_c = self.initial_pin + first_component.element_length + ConnectionPhase.pin_distance
                 first_component.connection_loop = True
+                Connections.board_connections.append({"type": "plus",
+                                                      "left": {"board": "tension board", "pos": [0, self.initial_pin]},
+                                                      "right": {"board": "main board", "pos": [self.current_component_r + 1, self.initial_pin]}
+                                                      })
                 # Set-up connections
 
         # Set-up the other connected elements
@@ -62,10 +66,26 @@ class ConnectionPhase:
                         self.connection_board[
                             self.current_component_r + 1, self.current_component_c - ConnectionPhase.pin_distance - 1] = 2
                         self.tension_board[1, self.current_component_c - ConnectionPhase.pin_distance] = 2
+                        Connections.board_connections.append({"type": "minus",
+                                                              "left": {"board": "tension board",
+                                                                       "pos": [1, self.current_component_c - ConnectionPhase.pin_distance]},
+                                                              "right": {"board": "main board",
+                                                                        "pos": [self.current_component_r + 1,
+                                                                                self.current_component_c - ConnectionPhase.pin_distance - 1]}
+                                                              })
+
                     else:
                         self.connection_board[self.current_component_r + 1, self.current_component_c - ConnectionPhase.pin_distance - 1] = ConnectionPhase.regular_connection_counter + 10
                         self.connection_board[
                             self.current_component_r + 1, self.current_component_c] = ConnectionPhase.regular_connection_counter + 10
+
+                        Connections.board_connections.append({"type": "regular",
+                                                              "left": {"board": "main board",
+                                                                       "pos": [self.current_component_r + 1, self.current_component_c - ConnectionPhase.pin_distance - 1]},
+                                                              "right": {"board": "main board",
+                                                                        "pos": [self.current_component_r + 1,
+                                                                                self.current_component_r + 1, self.current_component_c]}
+                                                              })
                     ConnectionPhase.regular_connection_counter += 1
 
                     self.current_component_c = self.current_component_c + next_component.element_length + ConnectionPhase.pin_distance

@@ -28,6 +28,9 @@ class BaseComponent(object):
         self.left_pin = [None, None]
         self.right_pin = [None, None]
         self.connection_loop = False
+        self.type = None
+        self.left_connection = None
+        self.right_connection = None
 
     @property
     def icon_path(self):

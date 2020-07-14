@@ -1,5 +1,5 @@
 from PyQt5 import QtGui, QtWidgets, QtCore
-from entrenador_electronico.source.components import BaseComponent
+from entrenador_electronico.source.components import BaseComponent, ConnectionComponent
 from entrenador_electronico.source.components.Components import Components
 from entrenador_electronico.source.ConnectionPhase import ConnectionPhase
 from entrenador_electronico.source.Connections import Connections
@@ -12,7 +12,6 @@ class ComponentIcon(QtWidgets.QLabel):
         self.icon = self.component.icon_qpixmap
         self.setPixmap(self.component.icon_qpixmap)
         self.info_label = QtWidgets.QLabel()
-        self.info_label.setText(f"{self.component.name} {self.component.counter} | <-- {self.component.get_pins[0]} | {self.component.global_id} | {self.component.get_pins[1]} --> ")
         self.info_label.setAlignment(QtCore.Qt.AlignCenter)
         self.layout.addWidget(self.info_label)
         self.layout.addWidget(self)
@@ -20,9 +19,15 @@ class ComponentIcon(QtWidgets.QLabel):
         # self.create_info_label()
 
     def update(self):
-        self.setPixmap(self.component.icon_qpixmap)
-        self.info_label.setText(
-            f"{self.component.name} {self.component.counter} | <-- {self.component.get_pins[0]} | {self.component.global_id} | {self.component.get_pins[1]} --> ")
+        if self.component.__class__.__name__ != "ConnectionComponent":
+            self.setPixmap(self.component.icon_qpixmap)
+            self.info_label.setText(
+                f"{self.component.name} {self.component.id} | <-- {self.component.get_pins[0]} | {self.component.global_id} | {self.component.get_pins[1]} --> ")
+        else:
+            self.component.icon_route = ConnectionComponent.icons[self.component.type]
+            self.setPixmap(self.component.icon_qpixmap)
+            self.info_label.setText(
+                f"{self.component.name} {self.component.id} | <-- {self.component.left_connection['board']} {self.component.left_connection['pos']} | {self.component.counter} | {self.component.right_connection['board']} {self.component.right_connection['pos']} --> ")
 
 
 class ConnectionPhaseDialog(QtWidgets.QDialog):
@@ -36,6 +41,11 @@ class ConnectionPhaseDialog(QtWidgets.QDialog):
         self.component_list = list(Components.components.values())
         self.component_list = list(filter(None.__ne__, [None if component.__class__.__name__ == "BatteryComponent" else component for component in self.component_list]))
         self.component_list = list(filter(lambda component: component.connection_loop, self.component_list))
+        for connection in Connections.board_connections:
+            self.component_list.append(ConnectionComponent(type=connection["type"],
+                                                           left_connection=connection["left"],
+                                                           right_connection=connection["right"],
+                                                           ))
         ConnectionPhaseDialog.current_id = 0
         self.initial_layout()
         self.update()
@@ -87,6 +97,3 @@ class ConnectionPhaseDialog(QtWidgets.QDialog):
         self.h_layout.addWidget(self.reset_button)
         self.layout.addLayout(self.h_layout)
         self.setLayout(self.layout)
-        print(Connections.component_board)
-        print(Connections.connection_board)
-        print(Connections.tension_board)

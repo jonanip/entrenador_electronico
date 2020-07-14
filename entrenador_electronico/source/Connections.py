@@ -8,6 +8,7 @@ class Connections:
     connecting = False
     connections = []
     connection_elements = []
+    board_connections = []
     has_connections = False
     connection_board = None
     tension_board = None
