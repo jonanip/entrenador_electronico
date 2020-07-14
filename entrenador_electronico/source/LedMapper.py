@@ -10,9 +10,14 @@ from adafruit_led_animation.animation.blink import Blink
 from adafruit_led_animation.animation.pulse import Pulse
 from adafruit_led_animation.animation.solid import Solid
 import time
+import threading
 
-class LedMapper:
+
+class LedMapper(threading.Thread):
+    counter = 0
+
     def __init__(self):
+        super().__init__()
         self.pixel = neopixel.NeoPixel(pin=board.D18, n=12, pixel_order=neopixel.GRB)
 
     def solid_light(self, color="red", pins=[]):
@@ -31,7 +36,8 @@ class LedMapper:
         #     pulse.animate()
 
     def blink_light(self, color="red", speed=1):
+        id = LedMapper.counter
         led_color = config.led_colors[color]
         blink = Blink(self.pixel, speed=speed, color=led_color)
-        while True:
+        while id == LedMapper.counter:
             blink.animate()
