@@ -38,6 +38,8 @@ class ConnectionPhaseDialog(QtWidgets.QDialog):
 
     def __init__(self, parent=None, *args, **kwargs):
         super(ConnectionPhaseDialog, self).__init__(*args, **kwargs)
+        if config.general.led_system:
+            self.led_mapper = LedMapper()
         self.connection_phase = ConnectionPhase()
         self.connection_phase.compute_components()
         self.connection_phase.set_board_matrixes()
@@ -52,8 +54,7 @@ class ConnectionPhaseDialog(QtWidgets.QDialog):
         ConnectionPhaseDialog.current_id = 0
         self.initial_layout()
         self.update()
-        if config.general.led_system:
-            self.led_mapper = LedMapper()
+
 
     def previous_button_func(self):
         ConnectionPhaseDialog.current_id -= 1
