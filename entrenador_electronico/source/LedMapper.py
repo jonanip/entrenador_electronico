@@ -14,7 +14,7 @@ import threading
 
 
 class LedMapper(threading.Thread):
-
+    counter = 0
     def __init__(self):
         super().__init__()
         self.pixel = neopixel.NeoPixel(pin=board.D18, n=12, pixel_order=neopixel.GRB)
@@ -36,9 +36,10 @@ class LedMapper(threading.Thread):
         #     pulse.animate()
 
     def blink_light(self, color="red", speed=1):
+        id = LedMapper.counter
         led_color = config.led_colors[color]
         blink = Blink(self.pixel, speed=speed, color=led_color)
-        while self.running:
+        while id == LedMapper.counter:
             blink.animate()
 
     def stop_lights(self):

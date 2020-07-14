@@ -40,6 +40,7 @@ class ConnectionPhaseDialog(QtWidgets.QDialog):
         super(ConnectionPhaseDialog, self).__init__(*args, **kwargs)
         if config.general.led_system:
             self.led_mapper = LedMapper()
+        self.threads = []
         self.connection_phase = ConnectionPhase()
         self.connection_phase.compute_components()
         self.connection_phase.set_board_matrixes()
@@ -83,9 +84,11 @@ class ConnectionPhaseDialog(QtWidgets.QDialog):
         self.test_thread()
 
     def test_thread(self):
-        self.led_mapper.running = False
+        LedMapper.counter += 1
+        for thread in self.threads:
+            thread.join()
         thread = threading.Thread(target=self.led_mapper.blink_light, args=(self.current_component.led_color,), daemon=True)
-        self.led_mapper.running = True
+        self.threads.append(thread)
         thread.start()
 
 
