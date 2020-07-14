@@ -20,7 +20,7 @@ class LedMapper:
         solid = Solid(self.pixel, color=led_color)
         solid.animate()
 
-    def pulse_light(self, color="red", speed=0.5, pins=[]):
+    def pulse_light(self, color="red", speed=1.0, pins=[]):
         led_color = config.led_colors[color]
         pulse = Pulse(self.pixel, speed=speed, color=led_color)
         while True:
