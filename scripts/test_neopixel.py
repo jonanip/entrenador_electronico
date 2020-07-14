@@ -13,5 +13,6 @@ if __name__ == "__main__":
     pixel[5] = (10, 0, 0,)
     pixel[6] = (10, 0, 0,)
     pixel[7] = (10, 0, 0,)
+    pixel[8] = (10, 0, 250,)
     pixel.show()
     time.sleep(10)
