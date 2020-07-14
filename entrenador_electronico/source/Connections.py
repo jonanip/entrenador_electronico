@@ -2,7 +2,6 @@ from typing import List
 
 from PyQt5 import QtCore
 
-
 class Connections:
     """Stores the connections present in the model"""
     counter = 0
@@ -10,6 +9,9 @@ class Connections:
     connections = []
     connection_elements = []
     has_connections = False
+    connection_board = None
+    tension_board = None
+    component_board = None
 
     @staticmethod
     def get_connection_lines(connection, frame) -> List:

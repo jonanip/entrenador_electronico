@@ -2,6 +2,7 @@ from PyQt5 import QtGui, QtWidgets, QtCore
 from entrenador_electronico.source.components import BaseComponent
 from entrenador_electronico.source.components.Components import Components
 from entrenador_electronico.source.ConnectionPhase import ConnectionPhase
+from entrenador_electronico.source.Connections import Connections
 
 class ComponentIcon(QtWidgets.QLabel):
     def __init__(self, component: BaseComponent, *args, **kwargs):
@@ -11,7 +12,7 @@ class ComponentIcon(QtWidgets.QLabel):
         self.icon = self.component.icon_qpixmap
         self.setPixmap(self.component.icon_qpixmap)
         self.info_label = QtWidgets.QLabel()
-        self.info_label.setText(f"{self.component.info_value}")
+        self.info_label.setText(f"{self.component.name} {self.component.counter} | <-- {self.component.get_pins[0]} | {self.component.global_id} | {self.component.get_pins[1]} --> ")
         self.info_label.setAlignment(QtCore.Qt.AlignCenter)
         self.layout.addWidget(self.info_label)
         self.layout.addWidget(self)
@@ -20,7 +21,8 @@ class ComponentIcon(QtWidgets.QLabel):
 
     def update(self):
         self.setPixmap(self.component.icon_qpixmap)
-        self.info_label.setText(f"{self.component.info_value}")
+        self.info_label.setText(
+            f"{self.component.name} {self.component.counter} | <-- {self.component.get_pins[0]} | {self.component.global_id} | {self.component.get_pins[1]} --> ")
 
 
 class ConnectionPhaseDialog(QtWidgets.QDialog):
@@ -30,9 +32,10 @@ class ConnectionPhaseDialog(QtWidgets.QDialog):
         super(ConnectionPhaseDialog, self).__init__(*args, **kwargs)
         self.connection_phase = ConnectionPhase()
         self.connection_phase.compute_components()
-        print("connection phase")
+        self.connection_phase.set_board_matrixes()
         self.component_list = list(Components.components.values())
-        print(self.component_list)
+        self.component_list = list(filter(None.__ne__, [None if component.__class__.__name__ == "BatteryComponent" else component for component in self.component_list]))
+        self.component_list = list(filter(lambda component: component.connection_loop, self.component_list))
         ConnectionPhaseDialog.current_id = 0
         self.initial_layout()
         self.update()
@@ -50,7 +53,7 @@ class ConnectionPhaseDialog(QtWidgets.QDialog):
         self.update()
 
     def update(self):
-        self.current_component = self.component_list[ConnectionPhaseDialog.current_id]["instance"]
+        self.current_component = self.component_list[ConnectionPhaseDialog.current_id]
         self.current_component_label.component = self.current_component
         self.current_component_label.update()
         if ConnectionPhaseDialog.current_id >= len(self.component_list) - 1:
@@ -65,9 +68,8 @@ class ConnectionPhaseDialog(QtWidgets.QDialog):
     def initial_layout(self):
         self.setWindowTitle(f"Connection phase")
         self.layout = QtWidgets.QVBoxLayout()
-        self.layout.setAlignment(QtCore.Qt.AlignRight)
         # Creates an horizontal layout for the parameters
-        self.current_component = self.component_list[ConnectionPhaseDialog.current_id]["instance"]
+        self.current_component: BaseComponent = self.component_list[ConnectionPhaseDialog.current_id]
         self.current_component_label = ComponentIcon(component=self.current_component, parent=self)
         self.current_component_label.setAlignment(QtCore.Qt.AlignCenter)
         self.h_layout = QtWidgets.QHBoxLayout()
@@ -85,3 +87,6 @@ class ConnectionPhaseDialog(QtWidgets.QDialog):
         self.h_layout.addWidget(self.reset_button)
         self.layout.addLayout(self.h_layout)
         self.setLayout(self.layout)
+        print(Connections.component_board)
+        print(Connections.connection_board)
+        print(Connections.tension_board)

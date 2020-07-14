@@ -5,6 +5,7 @@ from entrenador_electronico.source.components.Components import Components
 from entrenador_electronico.source.Connections import Connections
 from typing import List
 
+import numpy as np
 
 class BaseComponent(object):
     counter = 0
@@ -23,7 +24,10 @@ class BaseComponent(object):
         self.right_connection_id = None
         if self.drop_event:
             BaseComponent.counter += 1
-        Components.components[self.global_id] = {'instance': self}
+        Components.components[self.global_id] = self
+        self.left_pin = [None, None]
+        self.right_pin = [None, None]
+        self.connection_loop = False
 
     @property
     def icon_path(self):
@@ -62,6 +66,22 @@ class BaseComponent(object):
         Components.components.pop(self.global_id)
 
     @property
+    def has_connections(self):
+        component_connections = self.connections
+        if component_connections == {"left": [], "right": []}:
+            return False
+        else:
+            return True
+
+    @property
+    def left_vertex(self):
+        return Connections.connection_elements[self.left_connection_id]
+
+    @property
+    def right_vertex(self):
+        return Connections.connection_elements[self.right_connection_id]
+
+    @property
     def connections(self):
         """Computes the connections of the element"""
         component_connections = {"left": [], "right": []}
@@ -72,15 +92,21 @@ class BaseComponent(object):
                 temp_connection.remove(self.left_connection_id)
                 connected_vertex = Connections.connection_elements[temp_connection[0]]
                 connected_parent = connected_vertex.parent_element
-                component_connections["left"].append((connected_parent, connected_vertex))
+                component_connections["left"].append({"component": connected_parent, "connection": connected_vertex})
 
             if self.right_connection_id in connection:
                 temp_connection = list(connection)
                 temp_connection.remove(self.right_connection_id)
                 connected_vertex = Connections.connection_elements[temp_connection[0]]
                 connected_parent = connected_vertex.parent_element
-                component_connections["right"].append((connected_parent, connected_vertex))
+                component_connections["right"].append({"component": connected_parent, "connection": connected_vertex})
         return component_connections
+
+    @property
+    def get_pins(self):
+        pins = np.argwhere(Connections.component_board[:] == self.global_id)
+        assert len(pins) == self.element_length
+        return [pins[0], pins[-1]]
 
     def connections_print(self):
         print("--- Connection info ---")
@@ -93,3 +119,6 @@ class BaseComponent(object):
         for element in connections["right"]:
             print(f"\t{element[0].name} {element[0].id} -> {element[1].side}")
         print("--- End Connection info ---")
+
+    def print_pins(self):
+        connection_pins = 0
