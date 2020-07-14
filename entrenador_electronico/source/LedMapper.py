@@ -6,9 +6,9 @@ try:
 except NotImplementedError:
     config.general.led_system = False
 
+from adafruit_led_animation.animation.blink import Blink
 from adafruit_led_animation.animation.pulse import Pulse
 from adafruit_led_animation.animation.solid import Solid
-
 
 
 class LedMapper:
@@ -28,3 +28,8 @@ class LedMapper:
         #     target_pix = self.pixel[pin]
         #     pulse = Pulse(target_pix, speed=speed, color=led_color)
         #     pulse.animate()
+
+    def blink_light(self, color="red", speed = 1):
+        led_color = config.led_colors[color]
+        blink = Blink(self.pixel, speed=speed, color=led_color)
+        blink.animate()

@@ -19,7 +19,7 @@ class ComponentIcon(QtWidgets.QLabel):
         self.layout.addWidget(self)
         if config.general.led_system:
             self.led_mapper = LedMapper()
-            self.led_mapper.pulse_light(pins=[2, 3])
+            self.led_mapper.blink_light()
         # self.create_icon()
         # self.create_info_label()
 
