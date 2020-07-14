@@ -13,9 +13,14 @@ from adafruit_led_animation.animation.solid import Solid
 
 class LedMapper:
     def __init__(self):
-        self.pixel = neopixel.NeoPixel(pin=board.D18, n=12, pixel_order=neopixel.RGB)
+        self.pixel = neopixel.NeoPixel(pin=board.D18, n=12, pixel_order=neopixel.GRB)
 
     def solid_light(self, color="red", pins=[]):
         led_color = config.led_colors[color]
         solid = Solid(self.pixel, color=led_color)
         solid.animate()
+
+    def pulse_light(self, color="red", speed=0.5, pins=[]):
+        led_color = config.led_colors[color]
+        pulse = Pulse(self.pixel[pins], speed=speed, color=led_color)
+        pulse.animate()
