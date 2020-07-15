@@ -11,6 +11,7 @@ class BaseComponent(object):
     counter = 0
 
     def __init__(self, value=None, drop_event=None, left_connection=None, right_connection=None, *args, **kwargs):
+        self.board = None
         self.name = "default_name"
         self.drop_event = drop_event
         self.icon_route = get_content_path()
