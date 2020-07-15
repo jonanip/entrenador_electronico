@@ -134,3 +134,4 @@ class ConnectionPhaseDialog(QtWidgets.QDialog):
     def closeEvent(self, a0: QtGui.QCloseEvent) -> None:
         if config.general.led_system:
             self.led_mapper.lights_off()
+            LedMapper.counter += 1
