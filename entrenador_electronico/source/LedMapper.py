@@ -1,4 +1,4 @@
-from config import config
+from entrenador_electronico.config import config
 try:
     import board
     import neopixel

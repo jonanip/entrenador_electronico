@@ -4,7 +4,7 @@ from entrenador_electronico.source.utils import get_content_path
 from entrenador_electronico.source.components.Components import Components
 from entrenador_electronico.source.Connections import Connections
 from typing import List
-from config import config
+from entrenador_electronico.config import config
 import numpy as np
 
 class BaseComponent(object):

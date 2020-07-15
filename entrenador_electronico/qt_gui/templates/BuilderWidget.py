@@ -3,7 +3,7 @@ import importlib
 import numpy as np
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-from config import config
+from entrenador_electronico.config import config
 from entrenador_electronico.source.Connections import Connections
 from entrenador_electronico.source.components import BaseComponent
 from entrenador_electronico.source.components.Components import Components

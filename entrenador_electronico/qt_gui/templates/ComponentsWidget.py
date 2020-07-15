@@ -2,7 +2,7 @@ import importlib
 
 from PyQt5 import QtGui, QtWidgets, QtCore
 
-from config import config
+from entrenador_electronico.config import config
 
 
 class ComponentsWidget(QtWidgets.QListWidget):

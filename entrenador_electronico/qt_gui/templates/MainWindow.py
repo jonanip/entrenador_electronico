@@ -1,7 +1,7 @@
 import pathlib
 
 from PyQt5 import QtGui, QtWidgets, QtCore
-from config import config
+from entrenador_electronico.config import config
 from entrenador_electronico.source.utils import get_content_path
 from entrenador_electronico.qt_gui.templates import ConnectionPhaseDialog
 from entrenador_electronico.source.components.Components import Components

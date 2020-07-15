@@ -1,5 +1,5 @@
 from PyQt5 import QtGui, QtWidgets, QtCore
-from config import config
+from entrenador_electronico.config import config
 from entrenador_electronico.source.components import BaseComponent, ConnectionComponent
 from entrenador_electronico.source.components.Components import Components
 from entrenador_electronico.source.ConnectionPhase import ConnectionPhase
