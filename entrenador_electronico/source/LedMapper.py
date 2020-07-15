@@ -94,6 +94,7 @@ class LedMapper(threading.Thread):
 
     def update_main_board_lights(self):
         """Controls the main board component lights"""
+        id = LedMapper.counter
         solid_lights = []
         component: BaseComponent
         # Start the lights of the circuit
@@ -113,6 +114,6 @@ class LedMapper(threading.Thread):
             solid_light = Solid(sub_pixel_component, color=component.led_color)
             solid_lights.append(solid_light)
             print(solid_light)
-        while LedMapper.component_phase:
+        while LedMapper.component_phase and LedMapper.counter == id:
             for solid_light in solid_lights:
                 solid_light.animate()
