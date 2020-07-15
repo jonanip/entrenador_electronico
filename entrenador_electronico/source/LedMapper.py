@@ -104,7 +104,7 @@ class LedMapper(threading.Thread):
 
     def update_main_board_lights(self, current_component: BaseComponent):
         """Controls the main board component lights"""
-        self.lights_off()
+        # self.lights_off()
         id = LedMapper.counter
         solid_lights = []
         component: BaseComponent
@@ -125,7 +125,7 @@ class LedMapper(threading.Thread):
             solid_lights.append(solid_light)
         # Add blinking to current component
         blink_color = list(50 * np.array(current_component.led_color))
-        current_component_pins = list(range(component.get_pins[0][1], component.get_pins[1][1] + 1))
+        current_component_pins = list(range(current_component.get_pins[0][1], current_component.get_pins[1][1] + 1))
         if current_component.board == "main board":
             current_component_pins = np.array(current_component_pins) + LedMapper.component_board_led_number
         current_component_pins = [LedMapper.map_local_id_to_led_id(pin) for pin in current_component_pins]
