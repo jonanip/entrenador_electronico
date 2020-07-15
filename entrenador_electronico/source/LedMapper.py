@@ -85,8 +85,9 @@ class LedMapper(threading.Thread):
         solid_lights = []
         component: BaseComponent
         # Start the lights of the circuit
-        for component in Components.components:
-            pins = range(component.left_pin[1], component.right_pin[1])
+        for component_id in Components.components:
+            component = Components.components[component_id]
+            pins = range(component.get_pins[0][1], component.right_pin[1][1])
             pins = [self.map_local_id_to_led_id(pin) for pin in pins]
             sub_pixel_component = PixelMap(self.pixel, pins, individual_pixels=True)
             solid_light = Solid(sub_pixel_component, color=component.led_color)
