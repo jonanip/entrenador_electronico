@@ -103,7 +103,7 @@ class LedMapper(threading.Thread):
                 continue
             if component.__class__.__name__ == "ConnectionComponent":
                 continue
-            pins = list(range(component.get_pins[0][1], component.get_pins[1][1]))
+            pins = list(range(component.get_pins[0][1], component.get_pins[1][1] + 1))
             if component.board == "main board":
                 pins = np.array(pins) + LedMapper.component_board_led_number
 
