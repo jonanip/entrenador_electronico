@@ -102,8 +102,7 @@ class LedMapper(threading.Thread):
         solid_off = Solid(self.pixel, color=(0, 0, 0))
         solid_off.animate()
 
-    @staticmethod
-    def update_main_board_lights():
+    def update_main_board_lights(self):
         """Controls the main board component lights"""
         # self.lights_off()
         id = LedMapper.counter
@@ -121,10 +120,10 @@ class LedMapper(threading.Thread):
                 pins = np.array(pins) + LedMapper.component_board_led_number
             pins = [LedMapper.map_local_id_to_led_id(pin) for pin in pins]
 
-        #     sub_pixel_component = PixelMap(self.pixel, pins, individual_pixels=True)
-        #
-        #     solid_light = Solid(sub_pixel_component, color=component.led_color)
-        #     solid_lights.append(solid_light)
-        # while LedMapper.component_phase and LedMapper.counter == id:
-        #     for solid_light in solid_lights:
-        #         solid_light.animate()
+            sub_pixel_component = PixelMap(self.pixel, pins, individual_pixels=True)
+
+            solid_light = Solid(sub_pixel_component, color=component.led_color)
+            solid_lights.append(solid_light)
+        while LedMapper.component_phase and LedMapper.counter == id:
+            for solid_light in solid_lights:
+                solid_light.animate()
