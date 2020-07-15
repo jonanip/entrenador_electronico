@@ -19,33 +19,19 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1070cb2e-cb47-45d2-9a94-b6b9428a1f07" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/entrenador_electronico.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/entrenador_electronico/qt_gui/content/icons/svg/Inductor_test.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/entrenador_electronico/qt_gui/content/icons/svg/connection_plus.svg" afterDir="false" />
+    <list default="true" id="8b6a1d7a-e79e-4607-b5cb-ff403124e538" name="Default Changelist" comment="feat: add .idea to gitignore">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entrenador_electronico/config/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/entrenador_electronico/config/config.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Python Script" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1ebR1HTfU54fBY95lDrgpw3m0Lp" />
+  <component name="ProjectId" id="1eaoKQrgDgMhguid6ugjz1eCSzC" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -53,59 +39,10 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Python" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/entrenador_electronico/source/components" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Python" />
+    <property name="last_opened_file_path" value="E:/Programacion/Anaconda/Scripts/conda.exe" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\PyCharm\entrenador_electronico\entrenador_electronico\source\components" />
-      <recent name="C:\PyCharm\entrenador_electronico\entrenador_electronico\source" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Python.scratch">
-    <configuration name="BuilderWidget" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="entrenador_electronico" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/entrenador_electronico/qt_gui/templates" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/entrenador_electronico/qt_gui/templates/BuilderWidget.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="ConnectionPhase" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="entrenador_electronico" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/entrenador_electronico/source" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/entrenador_electronico/source/ConnectionPhase.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="entrenador_electronico" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -127,164 +64,108 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="scratch" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="entrenador_electronico" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$APPLICATION_CONFIG_DIR$/scratches" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.scratch" />
         <item itemvalue="Python.main" />
-        <item itemvalue="Python.ConnectionPhase" />
-        <item itemvalue="Python.BuilderWidget" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="StructureViewFactory">
-    <option name="AUTOSCROLL_MODE" value="false" />
-    <option name="ACTIVE_ACTIONS" value=",ALPHA_COMPARATOR,SHOW_INHERITED,SHOW_FIELDS" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="1070cb2e-cb47-45d2-9a94-b6b9428a1f07" name="Default Changelist" comment="" />
-      <created>1594588088505</created>
+      <changelist id="8b6a1d7a-e79e-4607-b5cb-ff403124e538" name="Default Changelist" comment="" />
+      <created>1594569000626</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1594588088505</updated>
+      <updated>1594569000626</updated>
     </task>
-    <task id="LOCAL-00001" summary="feat: add inductor.png">
-      <created>1594599875630</created>
+    <task id="LOCAL-00001" summary="feat: add resitor prueba">
+      <created>1594569274353</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1594599875630</updated>
+      <updated>1594569274353</updated>
     </task>
-    <task id="LOCAL-00002" summary="bugfix: fix bug when deleting components">
-      <created>1594600896737</created>
+    <task id="LOCAL-00002" summary="feat: add resitor prueba">
+      <created>1594571652760</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1594600896737</updated>
+      <updated>1594571652760</updated>
     </task>
-    <task id="LOCAL-00003" summary="feat: add connection awareness">
-      <created>1594604693545</created>
+    <task id="LOCAL-00003" summary="feat: add condensador">
+      <created>1594571810969</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1594604693545</updated>
+      <updated>1594571810969</updated>
     </task>
-    <task id="LOCAL-00004" summary="feat: add serial connectivity computation algorithm">
-      <created>1594739152476</created>
+    <task id="LOCAL-00004" summary="feat: add battery.png">
+      <created>1594573988081</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1594739152477</updated>
+      <updated>1594573988081</updated>
     </task>
-    <task id="LOCAL-00005" summary="chore: add neopixel test">
-      <created>1594742815600</created>
+    <task id="LOCAL-00005" summary="feat: add battery.png">
+      <created>1594574931107</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1594742815600</updated>
+      <updated>1594574931107</updated>
     </task>
-    <task id="LOCAL-00006" summary="chore: add neopixel test">
-      <created>1594742872084</created>
+    <task id="LOCAL-00006" summary="feat: add diodo.png">
+      <created>1594575574573</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1594742872084</updated>
+      <updated>1594575574573</updated>
     </task>
-    <task id="LOCAL-00007" summary="chore: add neopixel test">
-      <created>1594742997763</created>
+    <task id="LOCAL-00007" summary="feat: add inductor.png">
+      <created>1594592491880</created>
       <option name="number" value="00007" />
       <option name="presentableId" value="LOCAL-00007" />
       <option name="project" value="LOCAL" />
-      <updated>1594742997763</updated>
+      <updated>1594592491880</updated>
     </task>
-    <task id="LOCAL-00008" summary="chore: add neopixel test">
-      <created>1594743236103</created>
+    <task id="LOCAL-00008" summary="feat: add inductor.png">
+      <created>1594593523028</created>
       <option name="number" value="00008" />
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
-      <updated>1594743236103</updated>
+      <updated>1594593523028</updated>
     </task>
-    <task id="LOCAL-00009" summary="chore: add neopixel test">
-      <created>1594743297694</created>
+    <task id="LOCAL-00009" summary="feat: add inductor.png">
+      <created>1594595988517</created>
       <option name="number" value="00009" />
       <option name="presentableId" value="LOCAL-00009" />
       <option name="project" value="LOCAL" />
-      <updated>1594743297694</updated>
+      <updated>1594595988517</updated>
     </task>
-    <task id="LOCAL-00010" summary="chore: add neopixel test">
-      <created>1594744527031</created>
+    <task id="LOCAL-00010" summary="feat: add inductor.png">
+      <created>1594596242935</created>
       <option name="number" value="00010" />
       <option name="presentableId" value="LOCAL-00010" />
       <option name="project" value="LOCAL" />
-      <updated>1594744527032</updated>
+      <updated>1594596242935</updated>
     </task>
-    <task id="LOCAL-00011" summary="chore: add neopixel test">
-      <created>1594752559946</created>
+    <task id="LOCAL-00011" summary="feat: add inductor.png">
+      <created>1594597499733</created>
       <option name="number" value="00011" />
       <option name="presentableId" value="LOCAL-00011" />
       <option name="project" value="LOCAL" />
-      <updated>1594752559946</updated>
+      <updated>1594597499733</updated>
     </task>
-    <task id="LOCAL-00012" summary="chore: add neopixel test">
-      <created>1594752699479</created>
+    <task id="LOCAL-00012" summary="feat: add .idea to gitignore">
+      <created>1594826637230</created>
       <option name="number" value="00012" />
       <option name="presentableId" value="LOCAL-00012" />
       <option name="project" value="LOCAL" />
-      <updated>1594752699479</updated>
+      <updated>1594826637230</updated>
     </task>
-    <task id="LOCAL-00013" summary="chore: add neopixel test">
-      <created>1594752827456</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1594752827456</updated>
-    </task>
-    <task id="LOCAL-00014" summary="chore: add neopixel test">
-      <created>1594753031349</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1594753031349</updated>
-    </task>
-    <task id="LOCAL-00015" summary="chore: add neopixel test">
-      <created>1594753090786</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1594753090786</updated>
-    </task>
-    <task id="LOCAL-00016" summary="chore: add neopixel test">
-      <created>1594753461799</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1594753461799</updated>
-    </task>
-    <option name="localTasksCounter" value="17" />
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -300,73 +181,50 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat: add resitor prueba" />
+    <MESSAGE value="feat: add condensador" />
+    <MESSAGE value="feat: add battery.png" />
+    <MESSAGE value="feat: add diodo.png" />
     <MESSAGE value="feat: add inductor.png" />
-    <MESSAGE value="bugfix: fix bug when deleting components" />
-    <MESSAGE value="feat: add connection awareness" />
-    <MESSAGE value="feat: add serial connectivity computation algorithm" />
-    <MESSAGE value="chore: add neopixel test" />
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="feat: add .idea to gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add .idea to gitignore" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="586" y="198" key="#Inspections" timestamp="1594738494185">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="509" y="25" key="#main" timestamp="1594826688100">
+      <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="586" y="198" key="#Inspections/0.0.1920.1040@0.0.1920.1040" timestamp="1594738494185" />
-    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1594754010621">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="509" y="25" key="#main/0.0.1600.860@0.0.1600.860" timestamp="1594826688100" />
+    <state x="579" y="205" key="FileChooserDialogImpl" timestamp="1594573346141">
+      <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1594754010621" />
-    <state width="1899" height="187" key="GridCell.Tab.0.bottom" timestamp="1594742657777">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="579" y="205" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1594573346141" />
+    <state width="1579" height="222" key="GridCell.Tab.0.bottom" timestamp="1594599811778">
+      <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1899" height="187" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1594742657777" />
-    <state width="1899" height="187" key="GridCell.Tab.0.center" timestamp="1594742657777">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1579" height="222" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1594599811778" />
+    <state width="1579" height="222" key="GridCell.Tab.0.center" timestamp="1594599811778">
+      <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1899" height="187" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1594742657777" />
-    <state width="1899" height="187" key="GridCell.Tab.0.left" timestamp="1594742657777">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1579" height="222" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1594599811778" />
+    <state width="1579" height="222" key="GridCell.Tab.0.left" timestamp="1594599811778">
+      <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1899" height="187" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1594742657777" />
-    <state width="1899" height="187" key="GridCell.Tab.0.right" timestamp="1594742657777">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1579" height="222" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1594599811778" />
+    <state width="1579" height="222" key="GridCell.Tab.0.right" timestamp="1594599811778">
+      <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1899" height="187" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1594742657777" />
-    <state width="1899" height="348" key="GridCell.Tab.1.bottom" timestamp="1594741175559">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1579" height="222" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1594599811778" />
+    <state x="445" y="132" key="RollbackChangesDialog" timestamp="1594574592798">
+      <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1899" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1594741175559" />
-    <state width="1899" height="348" key="GridCell.Tab.1.center" timestamp="1594741175559">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="445" y="132" key="RollbackChangesDialog/0.0.1600.860@0.0.1600.860" timestamp="1594574592798" />
+    <state x="301" y="75" key="SettingsEditor" timestamp="1594573365179">
+      <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1899" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1594741175559" />
-    <state width="1899" height="348" key="GridCell.Tab.1.left" timestamp="1594741175559">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="301" y="75" key="SettingsEditor/0.0.1600.860@0.0.1600.860" timestamp="1594573365179" />
+    <state x="392" y="163" key="Vcs.Push.Dialog.v2" timestamp="1594597521991">
+      <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1899" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1594741175559" />
-    <state width="1899" height="348" key="GridCell.Tab.1.right" timestamp="1594741175559">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1594741175559" />
-    <state x="734" y="222" key="RollbackChangesDialog" timestamp="1594753853185">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="734" y="222" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1594753853185" />
-    <state x="461" y="165" key="SettingsEditor" timestamp="1594588312564">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1594588312564" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1594753873381">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594753873381" />
-    <state x="667" y="119" width="809" height="801" key="find.popup" timestamp="1594725581682">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="667" y="119" width="809" height="801" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1594725581682" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1594595886118">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1594595886118" />
+    <state x="392" y="163" key="Vcs.Push.Dialog.v2/0.0.1600.860@0.0.1600.860" timestamp="1594597521991" />
   </component>
 </project>
