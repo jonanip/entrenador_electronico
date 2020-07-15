@@ -118,6 +118,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         if config.general.led_system:
             self.led_mapper = LedMapper()
+            self.led_mapper.lights_off()
         self.show()
 
     def connection_phase_window(self):

@@ -112,13 +112,10 @@ class LedMapper(threading.Thread):
             pins = list(range(component.get_pins[0][1], component.get_pins[1][1] + 1))
             if component.board == "main board":
                 pins = np.array(pins) + LedMapper.component_board_led_number
-
             pins = [LedMapper.map_local_id_to_led_id(pin) for pin in pins]
             sub_pixel_component = PixelMap(self.pixel, pins, individual_pixels=True)
-            print(sub_pixel_component)
             solid_light = Solid(sub_pixel_component, color=component.led_color)
             solid_lights.append(solid_light)
-            print(solid_light)
         while LedMapper.component_phase and LedMapper.counter == id:
             for solid_light in solid_lights:
                 solid_light.animate()
