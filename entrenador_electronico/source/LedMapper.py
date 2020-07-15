@@ -73,7 +73,7 @@ class LedMapper(threading.Thread):
         for pin in range(0, 63):
             led_pin = LedMapper.map_local_id_to_led_id(pin)
             self.pixel[led_pin] = (50, 0, 0)
-            self.pixel[led_pin].show()
+            self.pixel.show()
             time.sleep(0.5)
 
 
