@@ -19,13 +19,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8b6a1d7a-e79e-4607-b5cb-ff403124e538" name="Default Changelist" comment="feat: add .idea to gitignore">
+    <list default="true" id="1070cb2e-cb47-45d2-9a94-b6b9428a1f07" name="Default Changelist" comment="feat: add connection lights">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entrenador_electronico/source/components/CondensadorComponent.py" beforeDir="false" afterPath="$PROJECT_DIR$/entrenador_electronico/source/components/CondensadorComponent.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entrenador_electronico/source/components/DiodoComponent.py" beforeDir="false" afterPath="$PROJECT_DIR$/entrenador_electronico/source/components/DiodoComponent.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entrenador_electronico/source/components/InductorComponent.py" beforeDir="false" afterPath="$PROJECT_DIR$/entrenador_electronico/source/components/InductorComponent.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entrenador_electronico/source/components/TransistorNPNComponent.py" beforeDir="false" afterPath="$PROJECT_DIR$/entrenador_electronico/source/components/TransistorNPNComponent.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entrenador_electronico/source/components/TransistorPNPComponent.py" beforeDir="false" afterPath="$PROJECT_DIR$/entrenador_electronico/source/components/TransistorPNPComponent.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entrenador_electronico/qt_gui/templates/ConnectionPhaseDialog.py" beforeDir="false" afterPath="$PROJECT_DIR$/entrenador_electronico/qt_gui/templates/ConnectionPhaseDialog.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entrenador_electronico/source/ConnectionPhase.py" beforeDir="false" afterPath="$PROJECT_DIR$/entrenador_electronico/source/ConnectionPhase.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entrenador_electronico/source/LedMapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/entrenador_electronico/source/LedMapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entrenador_electronico/source/components/BaseComponent.py" beforeDir="false" afterPath="$PROJECT_DIR$/entrenador_electronico/source/components/BaseComponent.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +45,28 @@
     <property name="last_opened_file_path" value="E:/Programacion/Anaconda/Scripts/conda.exe" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.ConnectionPhaseDialog">
+    <configuration name="ConnectionPhaseDialog" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="entrenador_electronico" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/entrenador_electronico/qt_gui/templates" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/entrenador_electronico/qt_gui/templates/ConnectionPhaseDialog.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="entrenador_electronico" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -70,6 +90,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.ConnectionPhaseDialog" />
         <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
@@ -176,7 +197,28 @@
       <option name="project" value="LOCAL" />
       <updated>1594827086399</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="feat: change config path">
+      <created>1594828635419</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1594828635419</updated>
+    </task>
+    <task id="LOCAL-00015" summary="feat: add connection lights">
+      <created>1594830902242</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1594830902242</updated>
+    </task>
+    <task id="LOCAL-00016" summary="feat: add connection lights">
+      <created>1594831055430</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1594831055430</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -198,7 +240,9 @@
     <MESSAGE value="feat: add diodo.png" />
     <MESSAGE value="feat: add inductor.png" />
     <MESSAGE value="feat: add .idea to gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add .idea to gitignore" />
+    <MESSAGE value="feat: change config path" />
+    <MESSAGE value="feat: add connection lights" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add connection lights" />
   </component>
   <component name="WindowStateProjectService">
     <state x="509" y="25" key="#main" timestamp="1594826688100">
@@ -209,22 +253,26 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="579" y="205" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1594573346141" />
-    <state width="1579" height="222" key="GridCell.Tab.0.bottom" timestamp="1594599811778">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state width="1899" height="187" key="GridCell.Tab.0.bottom" timestamp="1594831779509">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1579" height="222" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1594599811778" />
-    <state width="1579" height="222" key="GridCell.Tab.0.center" timestamp="1594599811778">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state width="1899" height="187" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1594831779509" />
+    <state width="1899" height="187" key="GridCell.Tab.0.center" timestamp="1594831779509">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1579" height="222" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1594599811778" />
-    <state width="1579" height="222" key="GridCell.Tab.0.left" timestamp="1594599811778">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state width="1899" height="187" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1594831779509" />
+    <state width="1899" height="187" key="GridCell.Tab.0.left" timestamp="1594831779509">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1579" height="222" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1594599811778" />
-    <state width="1579" height="222" key="GridCell.Tab.0.right" timestamp="1594599811778">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state width="1899" height="187" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1594831779509" />
+    <state width="1899" height="187" key="GridCell.Tab.0.right" timestamp="1594831779509">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1579" height="222" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1594599811778" />
+    <state width="1899" height="187" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1594831779509" />
     <state x="445" y="132" key="RollbackChangesDialog" timestamp="1594574592798">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -233,9 +281,10 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="301" y="75" key="SettingsEditor/0.0.1600.860@0.0.1600.860" timestamp="1594573365179" />
-    <state x="392" y="163" key="Vcs.Push.Dialog.v2" timestamp="1594827144424">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state x="470" y="197" key="Vcs.Push.Dialog.v2" timestamp="1594831057905">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="392" y="163" key="Vcs.Push.Dialog.v2/0.0.1600.860@0.0.1600.860" timestamp="1594827144424" />
+    <state x="470" y="197" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594831057905" />
   </component>
 </project>
