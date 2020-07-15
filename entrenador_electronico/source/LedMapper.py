@@ -9,6 +9,7 @@ except NotImplementedError:
 from adafruit_led_animation.animation.blink import Blink
 from adafruit_led_animation.animation.pulse import Pulse
 from adafruit_led_animation.animation.solid import Solid
+from adafruit_led_animation.animation.colorcycle import ColorCycle
 from adafruit_led_animation.helper import PixelMap
 from entrenador_electronico.source.Connections import Connections
 from entrenador_electronico.source.components import Components, BaseComponent
@@ -124,17 +125,18 @@ class LedMapper(threading.Thread):
             solid_light = Solid(sub_pixel_component, color=component.led_color)
             solid_lights.append(solid_light)
         # Add blinking to current component
-        blink_color = list(50 * np.array(current_component.led_color))
+        blink_color_A = list(30 * np.array(current_component.led_color))
+        blink_color_B = list(10 * np.array(current_component.led_color))
         current_component_pins = list(range(current_component.get_pins[0][1], current_component.get_pins[1][1] + 1))
         if current_component.board == "main board":
             current_component_pins = np.array(current_component_pins) + LedMapper.component_board_led_number
         current_component_pins = [LedMapper.map_local_id_to_led_id(pin) for pin in current_component_pins]
         current_component_pixels = PixelMap(self.pixel, current_component_pins, individual_pixels=True)
-        blink = Blink(current_component_pixels, speed=0.5, color=blink_color)
+        color_cycle = ColorCycle(current_component_pixels, speed=0.5, colors=[blink_color_A, blink_color_B])
 
         while LedMapper.component_phase and LedMapper.counter == id:
             for solid_light in solid_lights:
                 solid_light.animate()
-            blink.animate()
+            color_cycle.animate()
 
 
