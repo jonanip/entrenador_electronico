@@ -161,8 +161,7 @@ class LedMapper(threading.Thread):
                 current_component.right_connection['board'] == 'main board' else current_component.right_connection['pos']
             pins = [left_connection[1], right_connection[1]]
             pins = [LedMapper.map_local_id_to_led_id(pin) for pin in pins]
-            current_component_pins = [LedMapper.map_local_id_to_led_id(pin) for pin in pins]
-            current_component_pixels = PixelMap(self.pixel, current_component_pins, individual_pixels=True)
+            current_component_pixels = PixelMap(self.pixel, pins, individual_pixels=True)
             color_cycle = ColorCycle(current_component_pixels, speed=0.5, colors=[blink_color_A, blink_color_B])
 
         while LedMapper.component_phase and LedMapper.counter == id:
