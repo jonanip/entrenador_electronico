@@ -87,7 +87,7 @@ class ConnectionPhase:
                                                                        "pos": [self.current_component_r + 1, self.current_component_c - ConnectionPhase.pin_distance - 1]},
                                                               "right": {"board": "main board",
                                                                         "pos": [self.current_component_r + 1,
-                                                                                self.current_component_r + 1, self.current_component_c]}
+                                                                                self.current_component_c]}
                                                               })
                     ConnectionPhase.regular_connection_counter += 1
 

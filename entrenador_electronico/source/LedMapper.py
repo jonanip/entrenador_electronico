@@ -105,7 +105,7 @@ class LedMapper(threading.Thread):
 
     def update_main_board_lights(self, current_component: BaseComponent, component_list):
         """Controls the main board component lights"""
-        self.lights_off()
+        # self.lights_off()
         id = LedMapper.counter
         solid_lights = []
         component: BaseComponent

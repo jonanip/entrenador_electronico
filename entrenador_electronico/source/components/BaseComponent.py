@@ -9,7 +9,6 @@ import numpy as np
 
 class BaseComponent(object):
     counter = 0
-
     def __init__(self, value=None, drop_event=None, left_connection=None, right_connection=None, *args, **kwargs):
         self.board = None
         self.name = "default_name"
