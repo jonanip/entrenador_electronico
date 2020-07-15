@@ -93,8 +93,9 @@ class LedMapper(threading.Thread):
             time.sleep(0.5)
 
     def lights_off(self):
-        self.pixel[:] = [0, 0, 0]
-        self.pixel.show()
+        for pin in range(0, LedMapper.component_board_led_number + LedMapper.tension_board_led_number):
+            self.pixel[pin] = (0, 0, 0)
+            self.pixel.show()
 
     def update_main_board_lights(self):
         """Controls the main board component lights"""
