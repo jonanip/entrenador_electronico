@@ -129,7 +129,8 @@ class LedMapper(threading.Thread):
         if current_component.board == "main board":
             current_component_pins = np.array(current_component_pins) + LedMapper.component_board_led_number
         current_component_pins = [LedMapper.map_local_id_to_led_id(pin) for pin in current_component_pins]
-        blink = Blink(current_component_pins, speed=0.5, color=blink_color)
+        current_component_pixels = PixelMap(self.pixel, current_component_pins, individual_pixels=True)
+        blink = Blink(current_component_pixels, speed=0.5, color=blink_color)
 
         while LedMapper.component_phase and LedMapper.counter == id:
             for solid_light in solid_lights:
