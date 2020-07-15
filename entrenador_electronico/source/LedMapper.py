@@ -12,10 +12,17 @@ from adafruit_led_animation.animation.solid import Solid
 from adafruit_led_animation.helper import PixelMap
 import time
 import threading
+from typing import List
+import numpy as np
 
 
 class LedMapper(threading.Thread):
     counter = 0
+    component_board_led_number = 63
+    tension_board_led_number = 63
+    leds_in_row = 21
+    number_of_rows_per_board = 3
+
     def __init__(self):
         super().__init__()
         self.pixel = neopixel.NeoPixel(pin=board.D18, n=126, pixel_order=neopixel.GRB)
@@ -45,3 +52,28 @@ class LedMapper(threading.Thread):
 
     def stop_lights(self):
         self.running = False
+
+    # @staticmethod
+    # def map_local_id_to_led_id(vec: List, board="component"):
+    #     for local_id in vec:
+
+    @staticmethod
+    def map_local_id_to_led_id(value):
+        value = value + 1
+        rest_id = value % LedMapper.number_of_rows_per_board
+        n_id = np.floor(value / LedMapper.number_of_rows_per_board)
+        if rest_id == 0:
+            return n_id
+        elif rest_id == 1:
+            return LedMapper.leds_in_row * 2 - n_id - 1
+        elif rest_id == 2:
+            return LedMapper.leds_in_row * 2 + n_id
+
+    def lights_in_order(self):
+        for pin in range(0, 63):
+            led_pin = LedMapper.map_local_id_to_led_id(pin)
+            self.pixel[led_pin] = (50, 0, 0)
+            self.pixel[led_pin].show()
+            time.sleep(0.5)
+
+

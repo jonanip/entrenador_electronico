@@ -6,8 +6,8 @@ import numpy as np
 
 
 class ConnectionPhase:
-    connection_board_shape = [5, 63]
-    tension_board_shape = [2, 63]
+    connection_board_shape = [5, 62]
+    tension_board_shape = [2, 62]
     connection_board_shape_x = connection_board_shape[1]
     connection_board_shape_y = connection_board_shape[0]
     tension_board_shape_x = tension_board_shape[1]
