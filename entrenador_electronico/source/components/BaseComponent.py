@@ -10,7 +10,7 @@ import numpy as np
 class BaseComponent(object):
     counter = 0
 
-    def __init__(self, value=None, drop_event=None):
+    def __init__(self, value=None, drop_event=None, left_connection=None, right_connection=None, *args, **kwargs):
         self.name = "default_name"
         self.drop_event = drop_event
         self.icon_route = get_content_path()
@@ -29,9 +29,10 @@ class BaseComponent(object):
         self.right_pin = [None, None]
         self.connection_loop = False
         self.type = None
-        self.left_connection = None
-        self.right_connection = None
+        self.left_connection = left_connection
+        self.right_connection = right_connection
         self.led_color = "red"
+        self.board = None
 
     @property
     def icon_path(self):

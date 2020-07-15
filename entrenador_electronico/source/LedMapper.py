@@ -10,6 +10,8 @@ from adafruit_led_animation.animation.blink import Blink
 from adafruit_led_animation.animation.pulse import Pulse
 from adafruit_led_animation.animation.solid import Solid
 from adafruit_led_animation.helper import PixelMap
+from entrenador_electronico.source.Connections import Connections
+from entrenador_electronico.source.components import Components, BaseComponent
 import time
 import threading
 from typing import List
@@ -22,6 +24,8 @@ class LedMapper(threading.Thread):
     tension_board_led_number = 63
     leds_in_row = 21
     number_of_rows_per_board = 3
+    component_phase = True
+    connection_phase = False
 
     def __init__(self):
         super().__init__()
@@ -76,4 +80,17 @@ class LedMapper(threading.Thread):
             self.pixel.show()
             time.sleep(0.5)
 
-
+    def update_main_board_lights(self):
+        """Controls the main board component lights"""
+        solid_lights = []
+        component: BaseComponent
+        # Start the lights of the circuit
+        for component in Components.components:
+            pins = range(component.left_pin[1], component.right_pin[1])
+            pins = [self.map_local_id_to_led_id(pin) for pin in pins]
+            sub_pixel_component = PixelMap(self.pixel, pins, individual_pixels=True)
+            solid_light = Solid(sub_pixel_component, color=component.led_color)
+            solid_lights.append(solid_light)
+        while LedMapper.component_phase:
+            for solid_light in solid_lights:
+                solid_light.animate()

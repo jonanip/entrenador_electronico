@@ -32,6 +32,7 @@ class ConnectionPhase:
         self.set_initial_pin()
         # Check if batteries exist
         batteries = Components.find_by_component_type(component_type="BatteryComponent")
+        Connections.board_connections = []
         if batteries:
             battery_0: BaseComponent = batteries[0]
             if battery_0.has_connections:
@@ -40,6 +41,7 @@ class ConnectionPhase:
                 self.component_board[self.current_component_r, self.initial_pin:self.initial_pin + first_component.element_length] = first_component.global_id
                 first_component.left_pin = [self.current_component_r, self.initial_pin]
                 first_component.right_pin = [self.current_component_r, self.initial_pin + first_component.element_length]
+                first_component.board = "main board"
                 self.tension_board[0, self.initial_pin] = 1
                 self.connection_board[self.current_component_r + 1, self.initial_pin] = 1
                 self.current_component_c = self.initial_pin + first_component.element_length + ConnectionPhase.pin_distance
@@ -58,6 +60,7 @@ class ConnectionPhase:
                     next_current_component_connection = first_component.left_vertex if current_component_connection.side == "right" else first_component.right_vertex
                     next_component: BaseComponent = current_component.connections[next_current_component_connection.side][0]["component"]
                     next_component_connection = current_component.connections[next_current_component_connection.side][0]["connection"]
+                    next_component.board = "main board"
                     if next_component_connection.parent_element == battery_0:
                         connection_loop = False
                     self.component_board[self.current_component_r, self.current_component_c: self.current_component_c + next_component.element_length] = next_component.global_id

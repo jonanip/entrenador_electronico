@@ -20,7 +20,6 @@ class ComponentIcon(QtWidgets.QLabel):
         self.layout.addWidget(self.info_label)
         self.layout.addWidget(self)
 
-
     def update(self):
         if self.component.__class__.__name__ != "ConnectionComponent":
             self.setPixmap(self.component.icon_qpixmap)
@@ -47,12 +46,13 @@ class ConnectionPhaseDialog(QtWidgets.QDialog):
         self.component_list = list(Components.components.values())
         self.component_list = list(filter(None.__ne__, [None if component.__class__.__name__ == "BatteryComponent" else component for component in self.component_list]))
         self.component_list = list(filter(lambda component: component.connection_loop, self.component_list))
+        ConnectionComponent.counter = 0
         for connection in Connections.board_connections:
             self.component_list.append(ConnectionComponent(type=connection["type"],
                                                            left_connection=connection["left"],
                                                            right_connection=connection["right"],
                                                            ))
-        self.led_mapper.lights_in_order()
+        # self.led_mapper.lights_in_order()
         ConnectionPhaseDialog.current_id = 0
         self.initial_layout()
         self.update()
@@ -83,13 +83,13 @@ class ConnectionPhaseDialog(QtWidgets.QDialog):
         else:
             self.previous_button.setEnabled(True)
         if config.general.led_system:
-            self.test_thread()
+            self.update_lights()
 
-    def test_thread(self):
+    def update_lights(self):
         LedMapper.counter += 1
         for thread in self.threads:
             thread.join()
-        thread = threading.Thread(target=self.led_mapper.blink_light, args=(self.current_component.led_color, [0, 41, 42]), daemon=True)
+        thread = threading.Thread(target=self.led_mapper.update_main_board_lights, args=(self.current_component.led_color, [0, 41, 42]), daemon=True)
         self.threads.append(thread)
         thread.start()
 

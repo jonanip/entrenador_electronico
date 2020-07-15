@@ -10,6 +10,7 @@ component_dict:
     default_shortname: R
     default_value: 200.00
     default_unit: ohm
+    led_color: [1, 0, 0]
   light:
     module_path: entrenador_electronico.source.components.LightComponent
     class_name: LightComponent
@@ -75,3 +76,4 @@ database:
   7:
     element_type: condensador
     element_value: 100
+
