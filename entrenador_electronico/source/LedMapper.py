@@ -124,7 +124,7 @@ class LedMapper(threading.Thread):
             solid_light = Solid(sub_pixel_component, color=component.led_color)
             solid_lights.append(solid_light)
         # Add blinking to current component
-        blink_color = list[50 * np.array(current_component.led_color)]
+        blink_color = list(50 * np.array(current_component.led_color))
         current_component_pins = list(range(component.get_pins[0][1], component.get_pins[1][1] + 1))
         if current_component.board == "main board":
             current_component_pins = np.array(current_component_pins) + LedMapper.component_board_led_number
