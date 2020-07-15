@@ -108,7 +108,6 @@ class LedMapper(threading.Thread):
         self.lights_off()
         id = LedMapper.counter
         solid_lights = []
-        component: BaseComponent
         # Start the lights of the circuit
         if LedMapper.component_phase:
             for component_id in Components.components:

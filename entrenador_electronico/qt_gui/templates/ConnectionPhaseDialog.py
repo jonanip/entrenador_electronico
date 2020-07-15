@@ -130,3 +130,7 @@ class ConnectionPhaseDialog(QtWidgets.QDialog):
         self.h_layout.addWidget(self.reset_button)
         self.layout.addLayout(self.h_layout)
         self.setLayout(self.layout)
+
+    def closeEvent(self, a0: QtGui.QCloseEvent) -> None:
+        if config.general.led_system:
+            self.led_mapper.lights_off()
