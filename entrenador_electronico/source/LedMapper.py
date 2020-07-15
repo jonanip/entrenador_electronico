@@ -66,12 +66,24 @@ class LedMapper(threading.Thread):
         value = value + 1
         rest_id = value % LedMapper.number_of_rows_per_board
         n_id = np.floor(value / LedMapper.number_of_rows_per_board)
-        if rest_id == 0:
-            return int(n_id)
-        elif rest_id == 1:
-            return int(LedMapper.leds_in_row * 2 - n_id - 1)
-        elif rest_id == 2:
-            return int(LedMapper.leds_in_row * 2 + n_id)
+        if value < LedMapper.component_board_led_number:
+            if rest_id == 0:
+                return int(n_id)
+            elif rest_id == 1:
+                return int(LedMapper.leds_in_row * 2 - n_id - 1)
+            elif rest_id == 2:
+                return int(LedMapper.leds_in_row * 2 + n_id)
+
+        if value > LedMapper.component_board_led_number:
+            value -= LedMapper.component_board_led_number
+            rest_id = value % LedMapper.number_of_rows_per_board
+            n_id = np.floor(value / LedMapper.number_of_rows_per_board)
+            if rest_id == 0:
+                return int(n_id + LedMapper.component_board_led_number)
+            elif rest_id == 1:
+                return int(LedMapper.leds_in_row * 2 - n_id - 1 + LedMapper.component_board_led_number)
+            elif rest_id == 2:
+                return int(LedMapper.leds_in_row * 2 + n_id + LedMapper.component_board_led_number)
 
     def lights_in_order(self):
         for pin in range(0, 63):
@@ -87,8 +99,14 @@ class LedMapper(threading.Thread):
         # Start the lights of the circuit
         for component_id in Components.components:
             component = Components.components[component_id]
-            pins = range(component.get_pins[0][1], component.right_pin[1][1])
-            pins = [self.map_local_id_to_led_id(pin) for pin in pins]
+            if component.__class__.__name__ == "BatteryComponent":
+                continue
+            pins = list(range(component.get_pins[0][1], component.get_pins[1][1] + 1))
+            pins = [0, 1, 2, 3, 4, 5]
+            if component.board == "main board":
+                pins = np.array(pins) + LedMapper.component_board_led_number
+
+            pins = [LedMapper.map_local_id_to_led_id(pin) for pin in pins]
             sub_pixel_component = PixelMap(self.pixel, pins, individual_pixels=True)
             solid_light = Solid(sub_pixel_component, color=component.led_color)
             solid_lights.append(solid_light)

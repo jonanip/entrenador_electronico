@@ -93,6 +93,14 @@ class ConnectionPhaseDialog(QtWidgets.QDialog):
         self.threads.append(thread)
         thread.start()
 
+    def update_lights_local(self):
+        LedMapper.counter += 1
+        for thread in self.threads:
+            thread.join()
+        thread = threading.Thread(target=LedMapper.update_main_board_lights, daemon=True)
+        self.threads.append(thread)
+        thread.start()
+
 
     def initial_layout(self):
         self.setWindowTitle(f"Connection phase")
