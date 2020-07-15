@@ -111,7 +111,6 @@ class BaseComponent(object):
     def get_pins(self):
         pins = np.argwhere(Connections.component_board[:] == self.global_id)
         # assert len(pins) == self.element_length
-        print(pins)
         return [pins[0], pins[-1]]
 
     def connections_print(self):

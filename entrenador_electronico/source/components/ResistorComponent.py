@@ -14,7 +14,7 @@ class ResistorComponent(BaseComponent):
         self.value = value
         self.unit = config.component_dict.resistor.default_unit
         self.short_name = config.component_dict.resistor.default_shortname
-        self.led_color = config.component_dict.resistor.led_color
+        self.led_color = list(config.component_dict.resistor.led_color)
         if self.drop_event:
             ResistorComponent.counter += 1
 
