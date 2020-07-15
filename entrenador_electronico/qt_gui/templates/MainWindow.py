@@ -125,3 +125,4 @@ class MainWindow(QtWidgets.QMainWindow):
         """Starts the connection phase window"""
         connection_phase_dialog = ConnectionPhaseDialog(parent=self, led_mapper=self.led_mapper if config.general.led_system else {})
         connection_phase_dialog.exec_()
+        self.led_mapper.lights_off()
