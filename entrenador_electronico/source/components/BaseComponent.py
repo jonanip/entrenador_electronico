@@ -4,7 +4,7 @@ from entrenador_electronico.source.utils import get_content_path
 from entrenador_electronico.source.components.Components import Components
 from entrenador_electronico.source.Connections import Connections
 from typing import List
-
+from config import config
 import numpy as np
 
 class BaseComponent(object):
@@ -31,8 +31,7 @@ class BaseComponent(object):
         self.type = None
         self.left_connection = left_connection
         self.right_connection = right_connection
-        self.led_color = "red"
-        self.board = None
+        self.led_color = config.component_dict.resistor.led_color if config.component_dict.resistor.led_color else [1, 0, 0]
 
     @property
     def icon_path(self):

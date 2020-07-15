@@ -13,5 +13,6 @@ class LightComponent(BaseComponent):
         self.unit = config.component_dict.light.default_unit
         self.short_name = config.component_dict.light.default_shortname
         self.led_color = "blue"
+        self.led_color = config.component_dict.resistor.led_color
         if self.drop_event:
             LightComponent.counter += 1
