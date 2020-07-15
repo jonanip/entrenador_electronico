@@ -88,7 +88,7 @@ class ConnectionPhaseDialog(QtWidgets.QDialog):
         LedMapper.counter += 1
         for thread in self.threads:
             thread.join()
-        thread = threading.Thread(target=self.led_mapper.blink_light, args=(self.current_component.led_color, [3, 4]), daemon=True)
+        thread = threading.Thread(target=self.led_mapper.solid_light, args=(self.current_component.led_color, [3, 4]), daemon=True)
         self.threads.append(thread)
         thread.start()
 

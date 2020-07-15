@@ -18,7 +18,7 @@ class LedMapper(threading.Thread):
     counter = 0
     def __init__(self):
         super().__init__()
-        self.pixel = neopixel.NeoPixel(pin=board.D18, n=12, pixel_order=neopixel.GRB)
+        self.pixel = neopixel.NeoPixel(pin=board.D18, n=126, pixel_order=neopixel.GRB)
 
     def solid_light(self, color="red", pins=[]):
         led_color = config.led_colors[color]
