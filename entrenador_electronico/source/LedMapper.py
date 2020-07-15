@@ -94,7 +94,7 @@ class LedMapper(threading.Thread):
 
     def lights_off(self):
         solid_off = Solid(self.pixel, color=(0, 0, 0))
-        solid_off.show()
+        solid_off.animate()
 
     def update_main_board_lights(self):
         """Controls the main board component lights"""
