@@ -52,7 +52,7 @@ class ConnectionPhaseDialog(QtWidgets.QDialog):
                                                            left_connection=connection["left"],
                                                            right_connection=connection["right"],
                                                            ))
-        LedMapper.lights_in_order()
+        self.led_mapper.lights_in_order()
         ConnectionPhaseDialog.current_id = 0
         self.initial_layout()
         self.update()
