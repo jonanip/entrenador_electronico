@@ -11,5 +11,6 @@ class InductorComponent(BaseComponent):
         self.value = value
         self.unit = config.component_dict.inductor.default_unit
         self.short_name = config.component_dict.inductor.default_shortname
+        self.led_color = config.component_dict.inductor.led_color
         if self.drop_event:
             InductorComponent.counter += 1
