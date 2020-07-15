@@ -56,7 +56,7 @@ class ConnectionPhaseDialog(QtWidgets.QDialog):
         ConnectionPhaseDialog.current_id = 0
         self.initial_layout()
         self.update()
-        # self.update_lights_local()
+        self.update_lights_local()
 
 
     def previous_button_func(self):

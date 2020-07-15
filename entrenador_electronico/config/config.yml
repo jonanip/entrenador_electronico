@@ -18,7 +18,7 @@ component_dict:
     default_shortname: L
     default_value:
     default_unit:
-    led_color: [1, 1, 1]
+    led_color: [1, 1, 0]
   battery:
     module_path: entrenador_electronico.source.components.BatteryComponent
     class_name: BatteryComponent

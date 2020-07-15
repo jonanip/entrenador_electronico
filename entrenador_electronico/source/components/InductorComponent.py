@@ -3,7 +3,6 @@ from .BaseComponent import BaseComponent
 from config import config
 class InductorComponent(BaseComponent):
     counter = 0
-
     def __init__(self, value=config.component_dict.inductor.default_value, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.name = config.component_dict.inductor.default_name
