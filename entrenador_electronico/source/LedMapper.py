@@ -12,7 +12,7 @@ from adafruit_led_animation.animation.solid import Solid
 from adafruit_led_animation.animation.colorcycle import ColorCycle
 from adafruit_led_animation.helper import PixelMap
 from entrenador_electronico.source.Connections import Connections
-from entrenador_electronico.source.components import Components, BaseComponent
+from entrenador_electronico.source.components import Components, BaseComponent, ConnectionComponent
 import time
 import threading
 from typing import List
@@ -103,38 +103,74 @@ class LedMapper(threading.Thread):
         solid_off = Solid(sub_pixel_component, color=(0, 0, 0))
         solid_off.animate()
 
-    def update_main_board_lights(self, current_component: BaseComponent):
+    def update_main_board_lights(self, current_component: BaseComponent, component_list):
         """Controls the main board component lights"""
         self.lights_off()
         id = LedMapper.counter
         solid_lights = []
         component: BaseComponent
         # Start the lights of the circuit
-        for component_id in Components.components:
-            component = Components.components[component_id]
-            if component.__class__.__name__ == "BatteryComponent":
-                continue
-            if component.__class__.__name__ == "ConnectionComponent":
-                continue
-            pins = list(range(component.get_pins[0][1], component.get_pins[1][1] + 1))
-            if component.board == "main board":
-                pins = np.array(pins) + LedMapper.component_board_led_number
-            pins = [LedMapper.map_local_id_to_led_id(pin) for pin in pins]
-            sub_pixel_component = PixelMap(self.pixel, pins, individual_pixels=True)
+        if LedMapper.component_phase:
+            for component_id in Components.components:
+                component = Components.components[component_id]
+                if component.__class__.__name__ == "BatteryComponent":
+                    continue
+                if component.__class__.__name__ == "ConnectionComponent":
+                    continue
+                pins = list(range(component.get_pins[0][1], component.get_pins[1][1] + 1))
+                if component.board == "main board":
+                    pins = np.array(pins) + LedMapper.component_board_led_number
+                pins = [LedMapper.map_local_id_to_led_id(pin) for pin in pins]
+                sub_pixel_component = PixelMap(self.pixel, pins, individual_pixels=True)
 
-            solid_light = Solid(sub_pixel_component, color=component.led_color)
-            solid_lights.append(solid_light)
-        # Add blinking to current component
-        blink_color_A = list(50 * np.array(current_component.led_color))
-        blink_color_B = list(10 * np.array(current_component.led_color))
-        current_component_pins = list(range(current_component.get_pins[0][1], current_component.get_pins[1][1] + 1))
-        if current_component.board == "main board":
-            current_component_pins = np.array(current_component_pins) + LedMapper.component_board_led_number
-        current_component_pins = [LedMapper.map_local_id_to_led_id(pin) for pin in current_component_pins]
-        current_component_pixels = PixelMap(self.pixel, current_component_pins, individual_pixels=True)
-        color_cycle = ColorCycle(current_component_pixels, speed=0.5, colors=[blink_color_A, blink_color_B])
+                solid_light = Solid(sub_pixel_component, color=component.led_color)
+                solid_lights.append(solid_light)
+            # Add blinking to current component
+            blink_color_A = list(50 * np.array(current_component.led_color))
+            blink_color_B = list(10 * np.array(current_component.led_color))
+            current_component_pins = list(range(current_component.get_pins[0][1], current_component.get_pins[1][1] + 1))
+            if current_component.board == "main board":
+                current_component_pins = np.array(current_component_pins) + LedMapper.component_board_led_number
+            current_component_pins = [LedMapper.map_local_id_to_led_id(pin) for pin in current_component_pins]
+            current_component_pixels = PixelMap(self.pixel, current_component_pins, individual_pixels=True)
+            color_cycle = ColorCycle(current_component_pixels, speed=0.5, colors=[blink_color_A, blink_color_B])
+
+        if LedMapper.connection_phase:
+            for component in component_list:
+                if component.__class__.__name__ != "ConnectionComponent":
+                    continue
+                left_connection = np.array(component.left_connection['pos']) + np.array([0, LedMapper.component_board_led_number])\
+                    if component.left_connection['board'] == 'main board' else component.left_connection['pos']
+                right_connection = np.array(component.right_connection['pos']) + np.array([0, LedMapper.component_board_led_number]) if \
+                component.right_connection['board'] == 'main board' else component.right_connection['pos']
+                pins = [left_connection[1], right_connection[1]]
+                pins = [LedMapper.map_local_id_to_led_id(pin) for pin in pins]
+                sub_pixel_component = PixelMap(self.pixel, pins, individual_pixels=True)
+                color = ConnectionComponent.colors[component.type]
+                solid_light = Solid(sub_pixel_component, color=color)
+                solid_lights.append(solid_light)
+            # Add blinking to current component
+            color = ConnectionComponent.colors[current_component.type]
+            blink_color_A = list(50 * np.array(color))
+            blink_color_B = list(10 * np.array(color))
+            left_connection = np.array(current_component.left_connection['pos']) + np.array(
+                [0, LedMapper.component_board_led_number]) \
+                if current_component.left_connection['board'] == 'main board' else current_component.left_connection['pos']
+            right_connection = np.array(current_component.right_connection['pos']) + np.array(
+                [0, LedMapper.component_board_led_number]) if \
+                current_component.right_connection['board'] == 'main board' else current_component.right_connection['pos']
+            pins = [left_connection[1], right_connection[1]]
+            pins = [LedMapper.map_local_id_to_led_id(pin) for pin in pins]
+            current_component_pins = [LedMapper.map_local_id_to_led_id(pin) for pin in pins]
+            current_component_pixels = PixelMap(self.pixel, current_component_pins, individual_pixels=True)
+            color_cycle = ColorCycle(current_component_pixels, speed=0.5, colors=[blink_color_A, blink_color_B])
 
         while LedMapper.component_phase and LedMapper.counter == id:
+            for solid_light in solid_lights:
+                solid_light.animate()
+            color_cycle.animate()
+
+        while LedMapper.connection_phase and LedMapper.counter == id:
             for solid_light in solid_lights:
                 solid_light.animate()
             color_cycle.animate()

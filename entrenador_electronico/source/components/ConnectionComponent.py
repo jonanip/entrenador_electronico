@@ -10,6 +10,10 @@ class ConnectionComponent(BaseComponent):
              "minus": get_content_path() / "icons/minus_conn.png",
              "regular": get_content_path() / "icons/regular_conn.png",
              }
+    colors = {"plus": [1, 0, 0],
+             "minus": [0, 0, 1],
+             "regular": [0, 1, 0]
+    }
 
     def __init__(self, type=None, left_connection=None, right_connection=None, *args, **kwargs):
         super().__init__(*args, **kwargs)

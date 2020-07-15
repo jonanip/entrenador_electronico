@@ -56,7 +56,6 @@ class ConnectionPhaseDialog(QtWidgets.QDialog):
         ConnectionPhaseDialog.current_id = 0
         self.initial_layout()
         self.update()
-        # self.update_lights_local()
 
 
     def previous_button_func(self):
@@ -73,6 +72,12 @@ class ConnectionPhaseDialog(QtWidgets.QDialog):
 
     def update(self):
         self.current_component = self.component_list[ConnectionPhaseDialog.current_id]
+        if self.current_component.__class__.__name__ == "ConnectionComponent":
+            LedMapper.connection_phase = True
+            LedMapper.component_phase = False
+        else:
+            LedMapper.connection_phase = False
+            LedMapper.component_phase = True
         self.current_component_label.component = self.current_component
         self.current_component_label.update()
         if ConnectionPhaseDialog.current_id >= len(self.component_list) - 1:
@@ -90,7 +95,7 @@ class ConnectionPhaseDialog(QtWidgets.QDialog):
         LedMapper.counter += 1
         for thread in self.threads:
             thread.join()
-        thread = threading.Thread(target=self.led_mapper.update_main_board_lights, args=(self.current_component,), daemon=True)
+        thread = threading.Thread(target=self.led_mapper.update_main_board_lights, args=(self.current_component, self.component_list), daemon=True)
         self.threads.append(thread)
         thread.start()
 
@@ -98,7 +103,7 @@ class ConnectionPhaseDialog(QtWidgets.QDialog):
         LedMapper.counter += 1
         for thread in self.threads:
             thread.join()
-        thread = threading.Thread(target=LedMapper.update_main_board_lights, daemon=True)
+        thread = threading.Thread(target=LedMapper.update_main_board_lights, args=(self.current_component, self.component_list), daemon=True)
         self.threads.append(thread)
         thread.start()
 
