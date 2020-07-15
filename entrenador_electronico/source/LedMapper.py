@@ -63,11 +63,11 @@ class LedMapper(threading.Thread):
         rest_id = value % LedMapper.number_of_rows_per_board
         n_id = np.floor(value / LedMapper.number_of_rows_per_board)
         if rest_id == 0:
-            return n_id
+            return int(n_id)
         elif rest_id == 1:
-            return LedMapper.leds_in_row * 2 - n_id - 1
+            return int(LedMapper.leds_in_row * 2 - n_id - 1)
         elif rest_id == 2:
-            return LedMapper.leds_in_row * 2 + n_id
+            return int(LedMapper.leds_in_row * 2 + n_id)
 
     def lights_in_order(self):
         for pin in range(0, 63):
