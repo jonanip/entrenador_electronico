@@ -2,7 +2,7 @@ import importlib
 
 from PyQt5 import QtGui, QtWidgets, QtCore
 
-from config import config
+from entrenador_electronico.config import config
 
 
 class ComponentsWidget(QtWidgets.QListWidget):
@@ -40,3 +40,5 @@ class ComponentsWidget(QtWidgets.QListWidget):
             item.setIcon(QtGui.QIcon(item_instance.icon_path))
             item.setData(QtCore.Qt.UserRole, item_instance)
             self.addItem(item)
+
+

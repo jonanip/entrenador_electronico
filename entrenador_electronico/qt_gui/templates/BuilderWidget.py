@@ -1,38 +1,91 @@
 import importlib
 
+import numpy as np
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-from config import config
+from entrenador_electronico.config import config
+from entrenador_electronico.source.Connections import Connections
 from entrenador_electronico.source.components import BaseComponent
+from entrenador_electronico.source.components.Components import Components
+
+class ConnectionPainter(QtGui.QPainter):
+    def __init__(self, *args, **kwargs):
+        super(ConnectionPainter, self).__init__(*args, **kwargs)
+
+    def paint_connections(self):
+        self.drawLine(200, 100, 250, 150)
 
 
 class ConnectionButton(QtWidgets.QPushButton):
-    def __init__(self, *args, **kwargs):
-        super(ConnectionButton, self).__init__(*args, **kwargs)
+    counter = 0
+    connecting = False
+    connections = []
+    connection_elements = []
 
-    # def mousePressEvent(self, event: QtGui.QMouseEvent) -> None:
-    #     self.__mousePressPos = None
-    #     self.__mouseMovePos = None
-    #     if event.button() == QtCore.Qt.LeftButton:
-    #         self.__mousePressPos = event.globalPos()
-    #         self.__mouseMovePos = event.globalPos()
-    #     # painter = QtGui.QPainter
-    #     # painter.setPen(QtCore.Qt.black)
-    #     print(self.__mousePressPos)
-    #     super(ConnectionButton, self).mousePressEvent(event)
-    #
-    #
-    # def mouseMoveEvent(self, event):
-    #     if event.buttons() == QtCore.Qt.LeftButton:
-    #         # adjust offset from clicked point to origin of widget
-    #         currPos = self.mapToGlobal(self.pos())
-    #         globalPos = event.globalPos()
-    #         diff = globalPos - self.__mouseMovePos_
-    #         newPos = self.mapFromGlobal(currPos + diff)
-    #         self.move(newPos)
-    #
-    #         self.__mouseMovePos = globalPos
-    #     super(ConnectionButton, self).mouseMoveEvent(event)
+    def __init__(self, side=None, parent_component: BaseComponent=None, *args, **kwargs):
+        super(ConnectionButton, self).__init__(*args, **kwargs)
+        self.selected = False
+        self.id = Connections.counter
+        self.parent_element = parent_component
+        self.side = side
+        Connections.connection_elements.append(self)
+        Connections.counter += 1
+
+    def mousePressEvent(self, event):
+        if event.button() == QtCore.Qt.LeftButton:
+            if not self.selected:
+                self.setStyleSheet("background-color: red")
+                self.selected = True
+                self.pair_button.setEnabled(False)
+                if not Connections.connecting:
+                    Connections.connecting = True
+                    Connections.connect_id = self.id
+                if Connections.connecting and Connections.connect_id != self.id:
+                    self.setStyleSheet("")
+                    Connections.connecting = False
+                    Connections.connections.append([Connections.connect_id, self.id])
+                    self.pair_button.setEnabled(True)
+                    self.setEnabled(True)
+                    self.selected = False
+                    # connections_of_id = self.find_connections_by_id()
+                    for element in self.find_connected_elements():
+                        element.setEnabled(True)
+                        element.setStyleSheet("")
+                        element.pair_button.setEnabled(True)
+                        element.selected = False
+                    Connections.has_connections = True
+                    # BuilderWidget.update()
+            else:
+                self.setStyleSheet("")
+                self.selected = False
+                self.pair_button.setEnabled(True)
+        super(ConnectionButton, self).mousePressEvent(event)
+
+    def set_pair_button(self, pair_button):
+        self.pair_button = pair_button
+
+    def find_connections_by_id(self):
+        connections = np.array(Connections.connections)
+        connection_with_id = []
+        for idx, connection in enumerate(connections):
+            if self.id in connection:
+                connection_with_id.append(idx)
+        return connection_with_id
+
+    def find_connected_elements(self):
+        connection_ids = self.find_connections_by_id()
+        connected_elements = []
+        for connection in connection_ids:
+            for id in Connections.connections[connection]:
+                if id != self.id:
+                    connected_element_id = id
+            connected_elements.append(Connections.connection_elements[connected_element_id])
+        return connected_elements
+
+    def delete_connections(self):
+        connection_ids = self.find_connections_by_id()
+        for connection_id in connection_ids:
+            Connections.connections.pop(connection_id)
 
 
 class ParametersDialog(QtWidgets.QDialog):
@@ -70,7 +123,6 @@ class ParametersDialog(QtWidgets.QDialog):
         self.close()
 
 
-
 class ComponentLabel(QtWidgets.QLabel):
     def __init__(self, component: BaseComponent, event_pos=None, *args, **kwargs):
         super(ComponentLabel, self).__init__(*args, **kwargs)
@@ -83,7 +135,6 @@ class ComponentLabel(QtWidgets.QLabel):
         self.correct_size(event_pos=event_pos)
         self.create_connection_buttons()
 
-
     def mousePressEvent(self, event):
         self.__mousePressPos = None
         self.__mouseMovePos = None
@@ -93,6 +144,13 @@ class ComponentLabel(QtWidgets.QLabel):
 
         if event.button() == QtCore.Qt.RightButton:
             self.hide()
+            self.conn_a.delete_connections()
+            self.conn_b.delete_connections()
+            self.component.delete_component()
+            # Delete connections of left
+
+
+
 
         if event.button() == QtCore.Qt.MidButton:
             self.rotate()
@@ -133,7 +191,6 @@ class ComponentLabel(QtWidgets.QLabel):
             # self.conn_b.setGeometry(self.icon.height() / 2 - 4, self.height() - 18, self.conn_b.width(), self.conn_b.height())
             self.is_rotated = False
 
-
     def mouseReleaseEvent(self, event):
         if self.__mousePressPos is not None:
             moved = event.globalPos() - self.__mousePressPos
@@ -172,14 +229,26 @@ class ComponentLabel(QtWidgets.QLabel):
 
     def create_connection_buttons(self):
         fixed_size = QtCore.QSize(10, 10)
-        self.conn_a = ConnectionButton(parent=self)
-        self.conn_b = ConnectionButton(parent=self)
+        self.conn_a = ConnectionButton(parent=self, side="left", parent_component=self.component)
+        self.conn_b = ConnectionButton(parent=self, side="right", parent_component=self.component)
+        self.conn_a.set_pair_button(self.conn_b)
+        self.conn_b.set_pair_button(self.conn_a)
+
         self.conn_a.setFixedSize(fixed_size)
         self.conn_b.setFixedSize(fixed_size)
         self.conn_a.show()
         self.conn_b.show()
         self.conn_a.move(-1, round(self.height() / 2.0) - 4)
         self.conn_b.move(self.width()-self.conn_b.width() + 1, round(self.height() / 2.0) - 4)
+
+        # Add connection button info to component
+        self.component.left_connection_id = self.conn_a.id
+        self.component.right_connection_id = self.conn_b.id
+        # if Connections.has_connections:
+        #     BuilderWidget.update()
+        # if Connections.connections:
+        #     BuilderWidget.update()
+        #     BuilderWidget.paintEvent()
 
     def create_icon(self):
         self.setPixmap(self.component.icon_qpixmap)
@@ -198,6 +267,22 @@ class BuilderWidget(QtWidgets.QFrame):
         self.setLineWidth(0.6)
         self.setAcceptDrops(True)
         self.setMinimumSize(300, 400)
+        self.connection_painter = ConnectionPainter(self)
+        self.connection_painter.setPen(QtGui.QColor(100, 100, 100))
+        self.connection_painter.paint_connections()
+
+    def paintEvent(self, event):
+        painter = QtGui.QPainter(self)
+        pen = QtGui.QPen()
+        pen.setWidth(3)
+        pen.setColor(QtCore.Qt.red)
+        painter.setPen(pen)
+        if Connections.connections:
+            for connection in Connections.connections:
+                connection_lines = Connections.get_connection_lines(connection, self)
+                for line in connection_lines:
+                    painter.drawLine(line[0], line[1])
+        self.update()
 
     def dragEnterEvent(self, event: QtGui.QDragEnterEvent):
         if event.mimeData().hasText():
@@ -211,7 +296,10 @@ class BuilderWidget(QtWidgets.QFrame):
             component_class = getattr(component_module, config.component_dict[component_name].class_name)(
                 drop_event=True)
             drop_component = ComponentLabel(component=component_class, event_pos=pos, parent=self)
+            # Components.component_widget[component_class.id] = drop_component
             drop_component.show()
 
     def dragMoveEvent(self, event: QtGui.QDragMoveEvent) -> None:
         pass
+
+

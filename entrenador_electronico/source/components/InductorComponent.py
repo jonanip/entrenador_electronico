@@ -1,9 +1,8 @@
 from entrenador_electronico.source.utils import get_content_path
 from .BaseComponent import BaseComponent
-from config import config
+from entrenador_electronico.config import config
 class InductorComponent(BaseComponent):
     counter = 0
-
     def __init__(self, value=config.component_dict.inductor.default_value, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.name = config.component_dict.inductor.default_name
@@ -12,5 +11,6 @@ class InductorComponent(BaseComponent):
         self.value = value
         self.unit = config.component_dict.inductor.default_unit
         self.short_name = config.component_dict.inductor.default_shortname
+        self.led_color = config.component_dict.inductor.led_color
         if self.drop_event:
             InductorComponent.counter += 1

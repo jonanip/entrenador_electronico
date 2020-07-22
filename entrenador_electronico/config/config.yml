@@ -10,6 +10,7 @@ component_dict:
     default_shortname: R
     default_value: 200.00
     default_unit: ohm
+    led_color: [1, 0, 0] # red
   light:
     module_path: entrenador_electronico.source.components.LightComponent
     class_name: LightComponent
@@ -17,6 +18,7 @@ component_dict:
     default_shortname: L
     default_value:
     default_unit:
+    led_color: [1, 1, 0]  # yellow
   battery:
     module_path: entrenador_electronico.source.components.BatteryComponent
     class_name: BatteryComponent
@@ -31,6 +33,8 @@ component_dict:
     default_shortname: F
     default_value: 10
     default_unit: uF
+    led_color: [0, 0, 1] # blue
+
   diodo:
     module_path: entrenador_electronico.source.components.DiodoComponent
     class_name: DiodoComponent
@@ -38,6 +42,7 @@ component_dict:
     default_shortname: D
     default_value: 1
     default_unit: d
+    led_color: [1, 1, 1] # white
   inductor:
     module_path: entrenador_electronico.source.components.InductorComponent
     class_name: InductorComponent
@@ -45,6 +50,7 @@ component_dict:
     default_shortname: L
     default_value: 10
     default_unit: H
+    led_color: [0, 1, 1] # Cian
   transistorNPN:
     module_path: entrenador_electronico.source.components.TransistorNPNComponent
     class_name: TransistorNPNComponent
@@ -52,6 +58,8 @@ component_dict:
     default_shortname: T
     default_value: 100
     default_unit: NPN
+    led_color: [0, 1, 0] # green
+     # yellow
   transistorPNP:
     module_path: entrenador_electronico.source.components.TransistorPNPComponent
     class_name: TransistorPNPComponent
@@ -59,6 +67,8 @@ component_dict:
     default_shortname: T
     default_value: 100
     default_unit: PNP
+    led_color: [0, 1, 0] # green
+
 database:
   1:
     element_type: resistor
@@ -75,3 +85,8 @@ database:
   7:
     element_type: condensador
     element_value: 100
+
+led_colors:
+  red: [50, 0, 0]
+  blue: [0, 0, 50]
+  green: [0, 50, 0]

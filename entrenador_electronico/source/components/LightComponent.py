@@ -1,6 +1,6 @@
 from entrenador_electronico.source.utils import get_content_path
 from .BaseComponent import BaseComponent
-from config import config
+from entrenador_electronico.config import config
 
 class LightComponent(BaseComponent):
     counter = 0
@@ -12,5 +12,6 @@ class LightComponent(BaseComponent):
         self.value = value
         self.unit = config.component_dict.light.default_unit
         self.short_name = config.component_dict.light.default_shortname
+        self.led_color = config.component_dict.light.led_color
         if self.drop_event:
             LightComponent.counter += 1

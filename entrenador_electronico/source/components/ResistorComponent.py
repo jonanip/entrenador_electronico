@@ -1,6 +1,6 @@
 from entrenador_electronico.source.utils import get_content_path
 from .BaseComponent import BaseComponent
-from config import config
+from entrenador_electronico.config import config
 
 
 class ResistorComponent(BaseComponent):
@@ -14,6 +14,7 @@ class ResistorComponent(BaseComponent):
         self.value = value
         self.unit = config.component_dict.resistor.default_unit
         self.short_name = config.component_dict.resistor.default_shortname
+        self.led_color = config.component_dict.resistor.led_color
         if self.drop_event:
             ResistorComponent.counter += 1
 

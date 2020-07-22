@@ -1,6 +1,6 @@
 from entrenador_electronico.source.utils import get_content_path
 from .BaseComponent import BaseComponent
-from config import config
+from entrenador_electronico.config import config
 class TransistorNPNComponent(BaseComponent):
     counter = 0
 
@@ -12,5 +12,6 @@ class TransistorNPNComponent(BaseComponent):
         self.value = value
         self.unit = config.component_dict.transistorNPN.default_unit
         self.short_name = config.component_dict.transistorNPN.default_shortname
+        self.led_color = config.component_dict.transistorNPN.led_color
         if self.drop_event:
             TransistorNPNComponent.counter += 1

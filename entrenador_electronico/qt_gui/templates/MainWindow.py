@@ -1,7 +1,12 @@
 import pathlib
 
 from PyQt5 import QtGui, QtWidgets, QtCore
-from config import config
+from entrenador_electronico.config import config
+from entrenador_electronico.source.utils import get_content_path
+from entrenador_electronico.qt_gui.templates import ConnectionPhaseDialog
+from entrenador_electronico.source.components.Components import Components
+from entrenador_electronico.source.LedMapper import LedMapper
+import os
 
 from . import ComponentsWidget, BuilderWidget
 
@@ -41,13 +46,9 @@ class DropLabel(QtWidgets.QWidget):
     def dropEvent(self, event: QtGui.QDropEvent):
         pos: QtCore.QPoint = event.pos()
         drop_label = QtWidgets.QLabel()
-        print("label_created")
         drop_label.setText("hey")
-        print("label_created")
         drop_label.setGeometry(20, 20, 50, 20)
-        print("label_created")
         drop_label.show()
-        print("label_created")
         event.acceptProposedAction()
 
 
@@ -73,6 +74,9 @@ class BuilderFrame(QtWidgets.QFrame):
 
 
 class MainWindow(QtWidgets.QMainWindow):
+    if config.general.led_system:
+        led_mapper = LedMapper()
+
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
         self.init_ui()
@@ -80,7 +84,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def init_ui(self):
         # self.windowTitleChanged.connect(self.onWindowTitleChange)
         # self.windowTitleChanged.connect(lambda x: self.my_custom_fn(x, 25))
-        content_pathlib = pathlib.Path("G:\My Drive\dev\entrenador_electronico\entrenador_electronico\qt-gui\content")
+        content_pathlib = get_content_path()
         self.setWindowTitle("Entrenador electronico")
         self.content_widget = QtWidgets.QWidget()
         self.main_layout = QtWidgets.QHBoxLayout()
@@ -96,16 +100,29 @@ class MainWindow(QtWidgets.QMainWindow):
         self.main_layout.addWidget(self.builder_widget, 3)
 
         # Sets-up the toolbar
-        toolbar = QtWidgets.QToolBar("My main toolbar")
+        toolbar = QtWidgets.QToolBar("Start connection phase")
         self.addToolBar(toolbar)
-        button_action = QtWidgets.QAction(QtGui.QIcon(str(content_pathlib.joinpath("icons/balloon-box.png"))),
-                                          "my button", self)
-        button_action.setStatusTip("This is your button")
-        toolbar.addAction(button_action)
+        icon_path = content_pathlib / "icons/icon_connections.png"
+        connection_phase_action = QtWidgets.QAction(QtGui.QIcon(os.path.relpath(icon_path)),
+                                          "Connection phase", self)
+        connection_phase_action.setStatusTip("Start connection phase")
+        connection_phase_action.triggered.connect(self.connection_phase_window)
+        toolbar.addAction(connection_phase_action)
+
 
         # Sets-up the statusbar
         self.setStatusBar(QtWidgets.QStatusBar(self))
 
         self.content_widget.setLayout(self.main_layout)
         self.setCentralWidget(self.content_widget)
+
+        if config.general.led_system:
+            self.led_mapper = LedMapper()
+            self.led_mapper.lights_off()
         self.show()
+
+    def connection_phase_window(self):
+        """Starts the connection phase window"""
+        connection_phase_dialog = ConnectionPhaseDialog(parent=self, led_mapper=self.led_mapper if config.general.led_system else {})
+        connection_phase_dialog.exec_()
+
