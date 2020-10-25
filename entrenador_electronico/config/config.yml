@@ -90,3 +90,6 @@ led_colors:
   red: [50, 0, 0]
   blue: [0, 0, 50]
   green: [0, 50, 0]
+
+led_mapper:
+  number_of_leds: 144
