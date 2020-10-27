@@ -13,3 +13,6 @@ Parte A
 3º hacer el commit, darle a la flecha verde de arriba dcha y escribir en chore: (a la izda) lo que hemos realizado
 4º Después de hacer varios commit hay que subir a la nube haciendo VCS/Git/push 
 
+Parte B
+
+
