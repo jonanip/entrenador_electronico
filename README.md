@@ -21,5 +21,12 @@ Parte B    PASAR EL PROGRAMA A LA RAPSBERRY PI
 5º otra carpeta: cd entrenador_electronico
 6º sudo python3 main.py ,y nos abre el programa
 
+Parte C  PONER TAREAS PENDIENTES
+1º Entrar en github.com , usuario ****** pw: ********
+2º entrar en entrenador electronico
+3º ir arriba a issues
+4º new issue, poner las tareas
+
+
 
 
