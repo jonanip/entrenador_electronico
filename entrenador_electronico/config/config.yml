@@ -6,7 +6,7 @@ component_dict:
   resistor:
     module_path: entrenador_electronico.source.components.ResistorComponent
     class_name: ResistorComponent
-    default_name: Resistor1
+    default_name: Resistor
     default_shortname: R
     default_value: 200.00
     default_unit: ohm
@@ -46,7 +46,7 @@ component_dict:
   inductor:
     module_path: entrenador_electronico.source.components.InductorComponent
     class_name: InductorComponent
-    default_name: Inductor2
+    default_name: Inductor
     default_shortname: L
     default_value: 10
     default_unit: H
@@ -60,7 +60,7 @@ component_dict:
     default_unit: NPN
     led_color: [0, 1, 0] # green
      # yellow
-  transistorPNP:
+  transistorPNP2:
     module_path: entrenador_electronico.source.components.TransistorPNPComponent
     class_name: TransistorPNPComponent
     default_name: TransistorPNP
