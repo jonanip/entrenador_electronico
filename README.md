@@ -17,9 +17,9 @@ The exercises done for the tutorial can be found [here](/tutorials/1-basic_qt_tu
 1. Abrir el terminal dentro de Linux Debian
 2. Ir a la carpeta cd Software/entrenador_electronico
 3. Hacer sudo git pull (actualizar los cambios)
-4. Instalación sudo python3 -m pip install .
+4. Instalación sudo `python3 -m pip install .`
 5. otra carpeta: cd entrenador_electronico
-6. sudo python3 main.py ,y nos abre el programa
+6. `sudo python3 main.py` ,y nos abre el programa
 
 ## Parte C 
 - PONER TAREAS PENDIENTES
@@ -28,6 +28,11 @@ The exercises done for the tutorial can be found [here](/tutorials/1-basic_qt_tu
 3. ir arriba a issues
 4. new issue, poner las tareas
 
+## Palabras clave al hacer los commits
 
+- `chore`: Tareas de programación básicas, en principio cosas que el usuario final **no va a ver**.
+- `feat`: Tareas de programación que tienen un efecto para el usuario final (ej: una implementación de una funcionalidad nueva)
+- `docs`: Tareas relacionadas con documentación, cambiod de readme, etc
+- `bugfix`: Tareas relacionadas con corregir errores de programación
 
 
