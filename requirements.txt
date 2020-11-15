@@ -2,7 +2,7 @@ numpy~=1.18.1
 matplotlib
 pandas
 python-box
-pyyaml~=5.3.1
+pyyaml
 setuptools~=46.2.0
 adafruit-circuitpython-neopixel
 adafruit-circuitpython-led-animation
