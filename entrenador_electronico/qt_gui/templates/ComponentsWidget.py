@@ -32,6 +32,7 @@ class ComponentsWidget(QtWidgets.QListWidget):
         dropAction = drag.exec_(QtCore.Qt.MoveAction)
 
     def set_up_components(self):
+        print(config)
         for component in config.component_dict:
             component_module = importlib.import_module(config.component_dict[component].module_path)
             component_class = getattr(component_module, config.component_dict[component].class_name)

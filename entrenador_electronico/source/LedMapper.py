@@ -3,7 +3,7 @@ try:
     import board
     import neopixel
     config.general.led_system = True
-except NotImplementedError:
+except:
     config.general.led_system = False
 
 from adafruit_led_animation.animation.blink import Blink

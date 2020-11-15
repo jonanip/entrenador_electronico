@@ -1,15 +1,15 @@
 general:
-  width: 400
+  width: 800
   height: 500
 
 component_dict:
   resistor:
     module_path: entrenador_electronico.source.components.ResistorComponent
     class_name: ResistorComponent
-    default_name: ResistorTest
+    default_name: Resistor
     default_shortname: R
-    default_value: 250.00
-    default_unit: ohmi
+    default_value: 200.00
+    default_unit: ohm
     led_color: [1, 0, 0] # red
   light:
     module_path: entrenador_electronico.source.components.LightComponent
@@ -34,7 +34,6 @@ component_dict:
     default_value: 10
     default_unit: uF
     led_color: [0, 0, 1] # blue
-
   diodo:
     module_path: entrenador_electronico.source.components.DiodoComponent
     class_name: DiodoComponent
@@ -59,8 +58,7 @@ component_dict:
     default_value: 100
     default_unit: NPN
     led_color: [0, 1, 0] # green
-     # yellow
-  transistorPNP2:
+  transistorPNP:
     module_path: entrenador_electronico.source.components.TransistorPNPComponent
     class_name: TransistorPNPComponent
     default_name: TransistorPNP
