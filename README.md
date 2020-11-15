@@ -17,7 +17,7 @@ The exercises done for the tutorial can be found [here](/tutorials/1-basic_qt_tu
 1. Abrir el terminal dentro de Linux Debian
 2. Ir a la carpeta cd Software/entrenador_electronico
 3. Hacer sudo git pull (actualizar los cambios)
-4. Instalación sudo python3 ./setup.py install
+4. Instalación sudo python3 -m pip install .
 5. otra carpeta: cd entrenador_electronico
 6. sudo python3 main.py ,y nos abre el programa
 
