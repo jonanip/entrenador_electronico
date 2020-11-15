@@ -6,9 +6,9 @@ component_dict:
   resistor:
     module_path: entrenador_electronico.source.components.ResistorComponent
     class_name: ResistorComponent
-    default_name: Resistor
+    default_name: Resistor1
     default_shortname: R
-    default_value: 200.00
+    default_value: 250.00
     default_unit: ohm
     led_color: [1, 0, 0] # red
   light:
